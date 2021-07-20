@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "layers": {
+    "original-territorial-claim": {
+      "source": "mapbox://tileset-source/carledge/original-territorial-claim",
+      "minzoom": 0,
+      "maxzoom": 10
+    },
+    "original-territorial-claim-line": {
+      "source": "mapbox://tileset-source/carledge/original-territorial-claim-line",
+      "minzoom": 0,
+      "maxzoom": 10
+    },
+    "ceded-areas": {
+      "source": "mapbox://tileset-source/carledge/ceded-areas",
+      "minzoom": 0,
+      "maxzoom": 10
+    },
+    "boundary-lines": {
+      "source": "mapbox://tileset-source/carledge/boundary-lines",
+      "minzoom": 0,
+      "maxzoom": 10
+    }
+  }
+}
