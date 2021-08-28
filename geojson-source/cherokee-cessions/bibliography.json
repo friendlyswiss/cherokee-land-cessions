@@ -1,26 +1,30 @@
 {
-  'name': 'Cherokee Land Cession Sources',
-  'sources': [
+  "name": "Cherokee Land Cession Sources",
+  "sources": [
     {
-      'slug': 'cook2017',
-      'citation': 'Cook, Jessica L. 2017. \“Geography of a Massacre: Cherokee and Carolinian Visions of Land at Long Cane.\” Charlottesville: University of Virginia.',
-      'url': 'https://libraetd.lib.virginia.edu/downloads/bn999688r?filename=Geography_of_a_Massacre_Cherokee_and_Carolinian_Visions_of_Land_at_Long_Cane'
+      "slug": "cook2017",
+      "citation": "Cook, Jessica L. 2017. \"Geography of a Massacre: Cherokee and Carolinian Visions of Land at Long Cane.\" Charlottesville: University of Virginia.",
+      "url": "https://libraetd.lib.virginia.edu/downloads/bn999688r?filename=Geography_of_a_Massacre_Cherokee_and_Carolinian_Visions_of_Land_at_Long_Cane"
     },
     {
-      'slug': '',
-      'citation': ''
+      "slug": "devorsey1966",
+      "citation": "De Vorsey, Louis. 1966. The Indian Boundary in the Southern Colonies, 1763-1775. Chapel Hill: University of North Carolina Press.",
+      "url": "https://www.worldcat.org/title/indian-boundary-in-the-southern-colonies-1763-1775/oclc/477061"
     },
     {
-      'slug': '',
-      'citation': ''
+      "slug": "hewatt1779",
+      "citation": "Hewatt, Alexander. 1779. An Historical Account Of The Rise And Progress Of The Colonies Of South Carolina And Georgia. Vol. 1. London: Alexander Donaldson.",
+      "url": "http://onlinebooks.library.upenn.edu/webbin/book/lookupname?key=Hewatt%2C%20Alexander"
     },
     {
-      'slug': '',
-      'citation': ''
+      "slug": "mooney1900",
+      "citation": "Mooney, James. 1975 [1900]. Historical Sketch of the Cherokee. Chicago: Aldine.",
+      "url": "https://www.gutenberg.org/files/45634/45634-h/45634-h.htm#ch2"
     },
     {
-      'slug': '',
-      'citation': ''
+      "slug": "royce1887",
+      "citation": "Royce, Charles C. 1887. \"The Cherokee Nation of Indians: A Narrative of Their Official Relations with the Colonial and Federal Governments.\" Fifth Annual Report of the Bureau of Ethnology to the Secretary of the Smithsonian Institution, 1883—1884: 121—378. Washington: Government Printing Office.",
+      "url": "https://www.gutenberg.org/files/46493/46493-h/46493-h.htm"
     },
   ]
 }
