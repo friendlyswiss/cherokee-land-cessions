@@ -19,6 +19,7 @@
 { "type": "Feature", "properties": { "name": "High Shoals on the Appalachee River", "confidence": null, "year": "1715", "order": 15, "description": null, "cession": "Pre-Cession Territorial Claim" }, "geometry": { "type": "Point", "coordinates": [ -83.505928214022404, 33.817760646404103 ] } },
 { "type": "Feature", "properties": { "name": "Cherokee Corner", "confidence": null, "year": "1715", "order": 13, "description": null, "cession": "Pre-Cession Territorial Claim" }, "geometry": { "type": "Point", "coordinates": [ -83.190313787562275, 33.891327882810572 ] } },
 { "type": "Feature", "properties": { "name": "Great Buffalo Lick", "confidence": null, "year": "1715", "order": 11, "description": null, "cession": "Pre-Cession Territorial Claim" }, "geometry": { "type": "Point", "coordinates": [ -83.05708620188183, 33.775744600757768 ] } },
-{ "type": "Feature", "properties": { "name": "Mouth of Broad River", "confidence": null, "year": "1715", "order": 9, "description": null, "cession": "Pre-Cession Territorial Claim" }, "geometry": { "type": "Point", "coordinates": [ -82.56446031477843, 33.955730103632526 ] } }
+{ "type": "Feature", "properties": { "name": "Mouth of Broad River", "confidence": null, "year": "1715", "order": 9, "description": null, "cession": "Pre-Cession Territorial Claim" }, "geometry": { "type": "Point", "coordinates": [ -82.56446031477843, 33.955730103632526 ] } },
+{ "type": "Feature", "properties": { "name": "Shallow Ford of the Chattahoochee", "confidence": null, "year": "1715", "order": 17, "description": null, "cession": "Pre-Cession Territorial Claim" }, "geometry": { "type": "Point", "coordinates": [ -84.365174843953469, 34.000293172746375 ] } }
 ]
 }
