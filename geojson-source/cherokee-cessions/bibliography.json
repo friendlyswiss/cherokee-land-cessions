@@ -1,0 +1,26 @@
+{
+  'name': 'Cherokee Land Cession Sources',
+  'sources': [
+    {
+      'slug': 'cook2017',
+      'citation': 'Cook, Jessica L. 2017. \“Geography of a Massacre: Cherokee and Carolinian Visions of Land at Long Cane.\” Charlottesville: University of Virginia.',
+      'url': 'https://libraetd.lib.virginia.edu/downloads/bn999688r?filename=Geography_of_a_Massacre_Cherokee_and_Carolinian_Visions_of_Land_at_Long_Cane'
+    },
+    {
+      'slug': '',
+      'citation': ''
+    },
+    {
+      'slug': '',
+      'citation': ''
+    },
+    {
+      'slug': '',
+      'citation': ''
+    },
+    {
+      'slug': '',
+      'citation': ''
+    },
+  ]
+}
