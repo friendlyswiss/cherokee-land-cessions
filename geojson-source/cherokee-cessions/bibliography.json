@@ -12,6 +12,11 @@
       "url": "https://www.worldcat.org/title/indian-boundary-in-the-southern-colonies-1763-1775/oclc/477061"
     },
     {
+      "slug": "gragson2007",
+      "citation": "Gragson, Ted L., and Paul V. Bolstad. \"A Local Analysis of Early-Eighteenth-Century Cherokee Settlement.\" Social Science History 31, no. 3 (2007): 435-68.",
+      "url": "https://www.jstor.org/stable/40267947"
+    },
+    {
       "slug": "hewatt1779",
       "citation": "Hewatt, Alexander. 1779. An Historical Account Of The Rise And Progress Of The Colonies Of South Carolina And Georgia. Vol. 1. London: Alexander Donaldson.",
       "url": "http://onlinebooks.library.upenn.edu/webbin/book/lookupname?key=Hewatt%2C%20Alexander"
@@ -25,6 +30,11 @@
       "slug": "royce1887",
       "citation": "Royce, Charles C. 1887. \"The Cherokee Nation of Indians: A Narrative of Their Official Relations with the Colonial and Federal Governments.\" Fifth Annual Report of the Bureau of Ethnology to the Secretary of the Smithsonian Institution, 1883—1884: 121—378. Washington: Government Printing Office.",
       "url": "https://www.gutenberg.org/files/46493/46493-h/46493-h.htm"
+    },
+    {
+      "slug": "thornton1990",
+      "citation": "Thornton, Russell. The Cherokees: A population history. U of Nebraska Press, 1990.",
+      "url": "https://www.nebraskapress.unl.edu/nebraska-paperback/9780803294103/"
     }
   ]
 }
