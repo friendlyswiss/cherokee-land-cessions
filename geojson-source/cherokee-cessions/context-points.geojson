@@ -27,6 +27,7 @@
 { "type": "Feature", "properties": { "name": "Keowee", "startYear": 1715, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -82.90467, 34.85781 ] } },
 { "type": "Feature", "properties": { "name": "Tugaloo", "startYear": 1715, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -83.24361, 34.62472 ] } },
 { "type": "Feature", "properties": { "name": "NC-SC Boundary Stone", "startYear": 1715, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -80.797484, 34.819803 ] } },
-{ "type": "Feature", "properties": { "name": "Toxaway", "startYear": 1715, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -82.91499, 34.93598 ] } }
+{ "type": "Feature", "properties": { "name": "Toxaway", "startYear": 1715, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -82.91499, 34.93598 ] } },
+{ "type": "Feature", "properties": { "name": "1772 Boundary Stone", "startYear": 1772, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -82.21648, 35.19635 ] } }
 ]
 }
