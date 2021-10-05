@@ -28,6 +28,23 @@
 { "type": "Feature", "properties": { "name": "Tugaloo", "startYear": 1715, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -83.24361, 34.62472 ] } },
 { "type": "Feature", "properties": { "name": "NC-SC Boundary Stone", "startYear": 1715, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -80.797484, 34.819803 ] } },
 { "type": "Feature", "properties": { "name": "Toxaway", "startYear": 1715, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -82.91499, 34.93598 ] } },
-{ "type": "Feature", "properties": { "name": "1772 Boundary Stone", "startYear": 1772, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -82.21648, 35.19635 ] } }
+{ "type": "Feature", "properties": { "name": "1772 Boundary Stone", "startYear": 1772, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -82.21648, 35.19635 ] } },
+{ "type": "Feature", "properties": { "name": "Fort Dobbs", "startYear": 1756, "endYear": 1761 }, "geometry": { "type": "Point", "coordinates": [ -80.89736, 35.82163 ] } },
+{ "type": "Feature", "properties": { "name": "Fort Congaree", "startYear": 1718, "endYear": 1722 }, "geometry": { "type": "Point", "coordinates": [ -81.02759, 33.9402 ] } },
+{ "type": "Feature", "properties": { "name": "Fort Moore", "startYear": 1716, "endYear": 1763 }, "geometry": { "type": "Point", "coordinates": [ -81.91051, 33.43747 ] } },
+{ "type": "Feature", "properties": { "name": "Kituwa", "startYear": 1700, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -83.401138, 35.438852 ] } },
+{ "type": "Feature", "properties": { "name": "Nikwasee", "startYear": 1700, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -83.373536, 35.184899 ] } },
+{ "type": "Feature", "properties": { "name": "Watauga", "startYear": 1700, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -83.393713, 35.223548 ] } },
+{ "type": "Feature", "properties": { "name": "Cowee", "startYear": 1700, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -83.420056, 35.265466 ] } },
+{ "type": "Feature", "properties": { "name": "Coweechee", "startYear": 1700, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -83.472368, 35.283024 ] } },
+{ "type": "Feature", "properties": { "name": "Chota", "startYear": 1700, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -84.131585, 35.55514 ] } },
+{ "type": "Feature", "properties": { "name": "Fort Loudon", "startYear": 1756, "endYear": 1760 }, "geometry": { "type": "Point", "coordinates": [ -84.202962, 35.596427 ] } },
+{ "type": "Feature", "properties": { "name": "Mialoquo", "startYear": 1700, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -84.24048, 35.61534 ] } },
+{ "type": "Feature", "properties": { "name": "Tellico Blockhouse", "startYear": 1700, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -84.202888, 35.600005 ] } },
+{ "type": "Feature", "properties": { "name": "Fort Delaney", "startYear": 1800, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -83.829763, 35.205231 ] } },
+{ "type": "Feature", "properties": { "name": "Fort Lindsay", "startYear": 1800, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -83.562613, 35.375664 ] } },
+{ "type": "Feature", "properties": { "name": "Hiwassee", "startYear": 1700, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -84.564183, 35.241467 ] } },
+{ "type": "Feature", "properties": { "name": "Fort Butler", "startYear": 1800, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -84.03935, 35.081517 ] } },
+{ "type": "Feature", "properties": { "name": "Saluda Old Town", "startYear": 1700, "endYear": 2000 }, "geometry": { "type": "Point", "coordinates": [ -81.78382663030834, 34.170585528454325 ] } }
 ]
 }
