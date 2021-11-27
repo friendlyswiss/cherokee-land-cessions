@@ -237,7 +237,7 @@ function initialize(data, year) {
         "line-dasharray": ["literal", [2,2]],
         'line-width': 3
       },
-      filter: ["all", ["==", ["get", "surveyed"], "No"], ["==", ["get", "natural"], "No"], ["==", initial.year, ['get', "year"]]]
+      filter: ["all", ["==", initial.year, ['get', "year"]], ["==", ["get", "surveyed"], "No"], ["==", ["get", "natural"], "No"]]
     });
     
     map.addLayer({
@@ -1104,8 +1104,8 @@ function initialize(data, year) {
     let currentYearFilter = ['==', year, ['get', 'year']]
     map.setFilter('boundary-lines', currentYearFilter)
     map.setFilter('boundary-lines-highlight', currentYearFilter)
-    map.setFilter('boundary-lines-fill', currentYearFilter)
-    map.setFilter('boundary-lines-dashed', currentYearFilter)
+    map.setFilter('boundary-lines-fill', ["all", currentYearFilter, ["any", ["!=", ["get", "surveyed"], "No"], ["!=", ["get", "natural"], "No"]]])
+    map.setFilter('boundary-lines-dashed', ["all", currentYearFilter, ["==", ["get", "surveyed"], "No"], ["==", ["get", "natural"], "No"]])
     map.setFilter('boundary-points', currentYearFilter)
     map.setFilter('boundary-points-highlight', currentYearFilter)
     map.setFilter('boundary-points-fill', currentYearFilter)
