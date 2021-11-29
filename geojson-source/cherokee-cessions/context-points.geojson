@@ -34,6 +34,11 @@
 { "type": "Feature", "properties": { "name": "Tomassee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.0579, 34.87708 ] } },
 { "type": "Feature", "properties": { "name": "Chattooga", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.16952, 34.91594 ] } },
 { "type": "Feature", "properties": { "name": "Iotla", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.415848, 35.222555 ] } },
-{ "type": "Feature", "properties": { "name": "Tanasi Old Town", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.12381, 35.269308 ] } }
+{ "type": "Feature", "properties": { "name": "Tanasi Old Town", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.12381, 35.269308 ] } },
+{ "type": "Feature", "properties": { "name": "Chestowee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.68615, 35.22244 ] } },
+{ "type": "Feature", "properties": { "name": "Nununyi", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.31088, 35.49463 ] } },
+{ "type": "Feature", "properties": { "name": "Stecoa", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.35995, 35.43208 ] } },
+{ "type": "Feature", "properties": { "name": "Tuckasegee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.19636, 35.33388 ] } },
+{ "type": "Feature", "properties": { "name": "Tessentee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.54509, 35.39238 ] } }
 ]
 }

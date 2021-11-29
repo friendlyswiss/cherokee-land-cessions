@@ -642,18 +642,21 @@ function initialize(data, year) {
     filterMapBy(year)
     fitMapTo(year)
     removeSelectionHighlight()
+    window.history.pushState({"scope": "year", "value": year}, "", "/" + year)
   }
   
   function setActiveCession(cession) {
     showCessionContent(cession)
     fitMapTo(cession)
     removeSelectionHighlight()
+    window.history.pushState({"scope": "cession", "value": cession.properties.slug}, "", "/" + cession.properties.startYear + "/" + cession.properties.slug)
   }
   
   function setActiveFeature(feature) {
     showFeatureContent(feature)
     addSelectionHighlightTo(feature)
-    fitMapTo(feature) 
+    fitMapTo(feature)
+    window.history.pushState({"scope": "feature", "value": feature.properties.slug}, "", "/" + feature.properties.year + "/" + parentCessionOf(feature).properties.slug + "/" + feature.properties.slug)
   }
   
   ///////////////////////// Sidebar Content ////////////////////////
@@ -1109,7 +1112,6 @@ function initialize(data, year) {
     map.setFilter('boundary-points', currentYearFilter)
     map.setFilter('boundary-points-highlight', currentYearFilter)
     map.setFilter('boundary-points-fill', currentYearFilter)
-
   }
   
   function getYearBounds(year) {
@@ -1400,6 +1402,10 @@ function initialize(data, year) {
   
   ///////////////////////// Map Interactions /////////////////////////
   
+  window.onpopstate = function(event) {
+    console.log(`location: ${document.location}, state: ${JSON.stringify(event.state)}`)
+  }
+
   map.on("click", selectFeatureFromMap)
   
   map.on("mousemove", addHoverHighlights)
