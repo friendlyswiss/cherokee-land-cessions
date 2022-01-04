@@ -379,7 +379,7 @@ div.mapboxgl-popup-content p {
 Timeline Components 
 
 -------------------------------- */
-#cd-horizontal-timeline {
+#timeline-section {
   position: fixed;
   bottom: 0px;
   width: 100%;
@@ -392,23 +392,23 @@ Timeline Components
   z-index: 2;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); }
 
-#cd-horizontal-timeline #timeline {
+#timeline-section #timeline {
   /* show the timeline after events position has been set (using JavaScript) */
   opacity: 0; }
 
-#cd-horizontal-timeline #timeline.loaded {
+#timeline-section #timeline.loaded {
   position: relative;
   height: 100px;
   margin: 0 20px;
   opacity: 1; }
 
-#cd-horizontal-timeline #events-wrapper {
+#timeline-section #events-wrapper {
   position: relative;
   height: 100%;
   margin: 0 40px;
   overflow-x: scroll; }
 
-#cd-horizontal-timeline #events-wrapper::after, #cd-horizontal-timeline #events-wrapper::before {
+#timeline-section #events-wrapper::after, #timeline-section #events-wrapper::before {
   /* these are used to create a shadow effect at the sides of the timeline */
   content: '';
   position: fixed;
@@ -416,15 +416,15 @@ Timeline Components
   height: 100%;
   width: 20px; }
 
-#cd-horizontal-timeline #events-wrapper::before {
+#timeline-section #events-wrapper::before {
   left: 60px;
   background: linear-gradient(90deg, #f5f5f5 0%, rgba(245, 245, 245, 0) 100%); }
 
-#cd-horizontal-timeline #events-wrapper::after {
+#timeline-section #events-wrapper::after {
   right: 60px;
   background: linear-gradient(90deg, rgba(245, 245, 245, 0) 0%, #f5f5f5 100%); }
 
-#cd-horizontal-timeline #events {
+#timeline-section #events {
   /* this is the grey line/timeline */
   position: absolute;
   z-index: 1;
@@ -439,7 +439,7 @@ Timeline Components
   min-width: 2000px;
   -webkit-transform: scale(1); }
 
-#cd-horizontal-timeline #filling-line {
+#timeline-section #filling-line {
   position: absolute;
   display: block;
   z-index: 2;
@@ -457,14 +457,15 @@ Timeline Components
   -moz-transition: -moz-transform 0.3s;
   transition: width 0.3s; }
 
-#cd-horizontal-timeline #events li {
+#timeline-section #events li {
   position: absolute;
   top: 2px; }
 
-#cd-horizontal-timeline #events button {
+#timeline-section #events a {
   visibility: hidden;
   cursor: pointer;
   position: absolute;
+  text-decoration: none;
   width: 60px;
   left: -30px;
   bottom: 0;
@@ -475,6 +476,8 @@ Timeline Components
   background: #555555;
   border-radius: 6px;
   border: none;
+  line-height: normal;
+  text-align: center;
   /* fix bug on Safari - text flickering while timeline translates */
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
@@ -484,7 +487,7 @@ Timeline Components
   padding: 6px;
   margin-bottom: 10px; }
 
-#cd-horizontal-timeline #events button::before {
+#timeline-section #events a::before {
   content: " ";
   position: absolute;
   top: 100%;
@@ -495,7 +498,7 @@ Timeline Components
   border-style: solid;
   border-color: #555555 transparent transparent transparent; }
 
-#cd-horizontal-timeline #events button::after {
+#timeline-section #events a::after {
   /* this is used to create the event spot */
   visibility: visible;
   content: '';
@@ -523,17 +526,17 @@ Timeline Components
   -moz-transition: background-color 0.3s, border-color 0.3s;
   transition: background-color 0.3s, border-color 0.3s; }
 
-#cd-horizontal-timeline #events button.selected {
+#timeline-section #events a.selected {
   pointer-events: none;
   visibility: visible;
   background: #333333;
   bottom: 3px;
   z-index: 3; }
 
-#cd-horizontal-timeline #events button.selected::before {
+#timeline-section #events a.selected::before {
   border-color: #333333 transparent transparent transparent; }
 
-#cd-horizontal-timeline #events button.selected::after {
+#timeline-section #events a.selected::after {
   bottom: -22px;
   background-color: black;
   height: 16px;
@@ -545,14 +548,14 @@ Timeline Components
   -moz-box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.5); }
 
-#cd-horizontal-timeline #events button.older-event::after {
+#timeline-section #events a.older-event::after {
   border-color: white; }
 
-#cd-horizontal-timeline #decades {
+#timeline-section #decades {
   position: relative;
   left: -25px; }
 
-#cd-horizontal-timeline #decades li {
+#timeline-section #decades li {
   position: absolute;
   top: 4px;
   font-size: 15px;
@@ -561,7 +564,7 @@ Timeline Components
   width: 50px;
   text-align: center; }
 
-#cd-timeline-navigation button {
+#timeline-navigation a {
   position: absolute;
   top: 37%;
   box-sizing: border-box;
@@ -576,7 +579,7 @@ Timeline Components
   -moz-transition: border-color 0.3s;
   transition: border-color 0.3s; }
 
-#cd-timeline-navigation button::after {
+#timeline-navigation a::after {
   content: "";
   display: block;
   box-sizing: border-box;
@@ -590,22 +593,23 @@ Timeline Components
   -moz-transition: border-color 0.3s;
   transition: border-color 0.3s; }
 
-#cd-timeline-navigation button#prev-timeline::after {
+#timeline-navigation a#prev-timeline::after {
   transform: rotate(135deg);
   left: 10px; }
 
-#cd-timeline-navigation button#next-timeline::after {
+#timeline-navigation a#next-timeline::after {
   transform: rotate(-45deg);
   left: 8px; }
 
-#cd-timeline-navigation button#prev-timeline {
-  left: 0; }
+#timeline-navigation a#prev-timeline {
+  left: 0;
+  color: black; }
 
-#cd-timeline-navigation button#next-timeline {
+#timeline-navigation a#next-timeline {
   right: 0;
   color: black; }
 
-#cd-timeline-navigation button.inactive {
+#timeline-navigation a.inactive {
   opacity: 40%; }
 
 .sr-only {
@@ -848,16 +852,16 @@ button.close-icon {
   #feature-navigation button.inactive:hover::after {
     color: black; }
 
-  #cd-horizontal-timeline #events button:hover {
+  #timeline-section #events a:hover {
     visibility: visible; }
 
-  #cd-timeline-navigation button:hover,
-  #cd-timeline-navigation button:hover::after {
+  #timeline-navigation a:hover,
+  #timeline-navigation a:hover::after {
     cursor: pointer;
     border-color: #83C4BE; }
 
-  #cd-timeline-navigation button.inactive:hover,
-  #cd-timeline-navigation button.inactive:hover::after {
+  #timeline-navigation a.inactive:hover,
+  #timeline-navigation a.inactive:hover::after {
     border-color: black;
     color: black;
     cursor: not-allowed; }
@@ -867,7 +871,7 @@ button.close-icon {
 #mobile-scrim.map-expanded {
   display: none; }
 
-#cd-horizontal-timeline.map-expanded {
+#timeline-section.map-expanded {
   bottom: -100px; }
 
 #sidebar-wrapper.map-expanded {

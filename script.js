@@ -2,11 +2,6 @@
 
 mapboxgl.accessToken = "pk.eyJ1IjoiY2FybGVkZ2UiLCJhIjoiY2tsd2kxa245MmlwazJ1bHdhendncGYzNSJ9.ejONKNoTMvl1kNIdS9SRyQ"
 
-// Feature to initialize
-const initial = {"scope": "year", "value": 1715} // Defaults
-initial.scope = "year" // "year", "cession", "line", "point"
-initial.value = 1715 // year integer, cession slug, feature slug
-
 // Determine which years appear on the timeline
 const years = [
   1715,
@@ -62,17 +57,18 @@ async function main() {
   data.boundaryPoints = await loadData('https://raw.githubusercontent.com/friendlyswiss/cherokee-land-cessions/main/geojson-source/cherokee-cessions/boundary-points.geojson')
   data.contextPoints = await loadData('https://raw.githubusercontent.com/friendlyswiss/cherokee-land-cessions/main/geojson-source/cherokee-cessions/context-points.geojson')
   data.bibliography = await loadData('https://raw.githubusercontent.com/friendlyswiss/cherokee-land-cessions/main/geojson-source/cherokee-cessions/bibliography.json')
-  initialize(data, initial.year)
+  initialize(data)
 }
 
 async function loadData(url) {
   return fetch(url).then(response => response.json())
 }
 
-function initialize(data, year) {
+function initialize(data) {
   
+  const initial = {}
   const sources = getSources()
-  setInitialState()
+  setInitialStateFromURL()
 
   const mapParams = {
     container: "map",
@@ -88,7 +84,7 @@ function initialize(data, year) {
     attributionControl: false,
     renderWorldCopies: false
   }
-    if (initial.scope == "point") {
+  if (initial.scope == "point") {
     mapParams.center = initial.center
     mapParams.zoom = 13
     mapParams.offset = [0, pointOffset]
@@ -360,7 +356,218 @@ function initialize(data, year) {
 
   })
   
-  ///////////////////// Set initial state of map ///////////////////////
+  ///////////////////// Application States ///////////////////////
+
+  function activeYear() {
+    let year
+    if (history.state !== null) {
+      year = history.state.year
+    }
+    else {
+      year = initial.year
+    }
+    return year
+  }
+
+  function prevYear() {
+    let year
+    if (activeYear() == years[0]) {
+      year = null
+    }
+    else {
+      year = years[years.indexOf(activeYear()) - 1]
+    }
+    return year
+  }
+
+  function nextYear() {
+    let year
+    if (activeYear() == years[years.length - 1]) {
+      year = null
+    }
+    else {
+      year = years[years.indexOf(activeYear()) + 1]
+    }
+    return year
+  }
+
+  function activeCession() {
+    let cession
+    if (history.state !== null) {
+      cession = data.cededAreas.features.find(x => x.properties.slug === history.state.cession)
+    }
+    else {
+      cession = initial.cession
+    }
+    return cession
+  }
+
+  function activeFeature() {
+    let feature
+    if (history.state !== null) {
+      feature = data.boundaryLines.features.find(x => x.properties.slug === history.state.feature)
+      if (feature == null) {
+        feature = data.boundaryPoints.features.find(x => x.properties.slug === history.state.feature)
+      }
+    }
+    else {
+      feature = initial.feature
+    }
+    return feature
+  }
+  
+  function setInitialStateFromURL() { // Read the initial state from the URL
+    
+    // Get pathname from target URL
+    let path = window.location.pathname    
+    // Remove starting "/"
+    path = path.substring(1)
+    // Remove ending "/" if it exists
+    if (path.charAt(path.length -1) == "/") {
+      path = path.substring(0, path.length - 1);
+    }
+    
+    // If no URL string exists, default to first year
+    if (path === "") {
+      initial.scope = "year"
+      initial.year = years[0]
+      initial.bounds = getYearBounds(initial.year)
+      showYearContent()
+      initTimeline()
+    }
+
+    // Otherwise, process the URL string
+    else {
+      // Break pathname into parts
+      let pathArray = path.split("/")
+      
+      // Process URLs with one level
+      if (pathArray.length === 1) {
+        if (matchesYear(pathArray[0])) {
+          initial.scope = "year"
+          initial.year = parseInt(pathArray[0])
+          initial.bounds = getYearBounds(initial.year)
+          showYearContent()
+          initTimeline()
+        }
+        else {
+          // Send to 404 page
+          console.log("404 – First part of path does not match a year")
+        }
+      }
+
+      // Process URLs with two levels
+      else if (pathArray.length === 2) {
+        if (matchesCession(pathArray[1]) && matchesYear(pathArray[0])) {
+          initial.cession = data.cededAreas.features.find(x => x.properties.slug === pathArray[1])
+          initial.year = initial.cession.properties.startYear
+          if (initial.year === parseInt(pathArray[0])) {
+            initial.scope = "cession"
+            initial.bounds = getCessionBounds(initial.cession)
+            showCessionContent()
+            initTimeline()
+          }
+          else {
+            // Send to 404 page
+            console.log("404 – Year and cession do not match")
+          }
+        } 
+        else { 
+          // Send to 404 page
+          console.log("404 – First part of path is not a year or second part of path does not match a cession")
+        }
+      }
+
+      // Process URLs with three levels
+      else if (pathArray.length === 3) {
+        if (matchesLine(pathArray[2])) {
+          initial.scope = "line"
+          initial.feature = data.boundaryLines.features.find(x => x.properties.slug === pathArray[2])
+          initial.bounds = getLineStringBounds(initial.feature)
+        }
+        else if (matchesPoint(pathArray[2])) {
+          initial.scope = "point"
+          initial.feature = data.boundaryPoints.features.find(x => x.properties.slug === pathArray[2])
+          initial.bounds = null
+          initial.center = initial.feature.geometry.coordinates
+        }
+        else { 
+            // Send to 404 page
+            console.log("404 – Third part of path does not match a line or point feature")
+        }
+        if (matchesCession(pathArray[1]) && matchesYear(pathArray[0])) {
+          
+          initial.cession = data.cededAreas.features.find(x => x.properties.slug === pathArray[1])
+          initial.year = initial.cession.properties.startYear
+          if (initial.feature.properties.cession === initial.cession.properties.name && initial.year === parseInt(pathArray[0])) {
+            selectedFeatureId = initial.feature.id
+            showFeatureContent(initial.feature)
+            initTimeline()
+          }
+          else {
+            // Send to 404 page
+            console.log("404 – Feature and cession do not match or cession and year do not match")
+          }
+        }
+        else {
+          // Send to 404 page
+          console.log("404 – First part of path is not a year or second part of path does not match a cession")
+        }
+      }
+      else if (pathArray.length > 3) {
+        // Send to 404 page
+        console.log("404 – Paths longer than four parts do not exist")
+      }
+    }
+
+    function matchesYear(slug) {
+      if (/^[0-9]{4}$/.test(slug) && years.includes(parseInt(slug))) {
+        return true
+      }
+      else {
+        return false
+      }
+    }
+    
+    function matchesCession(slug) {
+      const cessionSlugs = []
+      for (cession of data.cededAreas.features) {
+        cessionSlugs.push(cession.properties.slug)
+      }
+      if (cessionSlugs.includes(slug)) {
+        return true
+      }
+      else {
+        return false
+      }
+    }
+    
+    function matchesLine(slug) {
+      const lineSlugs = []
+      for (line of data.boundaryLines.features) {
+        lineSlugs.push(line.properties.slug)
+      }
+      if (lineSlugs.includes(slug)) {
+        return true
+      }
+      else {
+        return false
+      }
+    }
+    
+    function matchesPoint(slug) {
+      const pointSlugs = []
+      for (point of data.boundaryPoints.features) {
+        pointSlugs.push(point.properties.slug)
+      }
+      if (pointSlugs.includes(slug)) {
+        return true
+      }
+      else {
+        return false
+      }
+    }
+  }
   
   function getSources() {
     let sources = []
@@ -370,119 +577,145 @@ function initialize(data, year) {
     return sources
   }
   
-  function setInitialState() {
-    if (initial.scope == "year") {
-      initial.year = initial.value
-      initial.bounds = getYearBounds(initial.year)
-      showYearContent(initial.year)
-      initTimeline(initial.year)
-    }
-    else if (initial.scope == "cession") {      
-      initial.feature = data.cededAreas.features.find(x => x.properties.slug === initial.value)
-      initial.year = initial.feature.properties.startYear
-      initial.bounds = getCessionBounds(initial.feature)
-      showCessionContent(initial.feature)
-      initTimeline(initial.year)
-    }
-    else if (initial.scope == "line") {
-      initial.feature = data.boundaryLines.features.find(x => x.properties.slug === initial.value)
-      initial.year = initial.feature.properties.year
-      initial.bounds = getLineStringBounds(initial.feature)
-      showFeatureContent(initial.feature)
-      selectedFeatureId = initial.feature.id
-      initTimeline(initial.year)
-    }
-    else if (initial.scope == "point") {
-      initial.feature = data.boundaryPoints.features.find(x => x.properties.slug === initial.value)
-      initial.year = initial.feature.properties.year
-      initial.bounds = null
-      initial.center = initial.feature.geometry.coordinates
-      showFeatureContent(initial.feature)
-      selectedFeatureId = initial.feature.id
-      initTimeline(initial.year)
-    }
-  }
-  
   ///////////////////// Timeline ///////////////////////
 
-  function initTimeline(year) {
+  function updateTimeline() {
+    setArrowStates()
+    updateFilling()
+    setActiveTimelinePoint()
+    setOlderEvents()
+    scrollTimeline()
 
-    let fillingLine = document.getElementById("filling-line")
+    function setArrowStates() {
+      // Set inactive class on previous/next navigation if first or last year
+      // Set href values for previous/next navigation
+
+      let prevA = document.getElementById('prev-timeline')
+      let nextA = document.getElementById('next-timeline')
+
+      if (activeYear() == years[0]) {
+        prevA.classList.add('inactive')
+        nextA.classList.remove('inactive')
+        prevA.removeAttribute('href')
+        nextA.setAttribute('href', years[1])
+      } 
+      else if (activeYear() == years[years.length - 1]) {
+        prevA.classList.remove('inactive')
+        nextA.classList.add('inactive')
+        nextA.removeAttribute('href')
+        prevA.setAttribute('href', years[years.length - 2])
+      }
+      else {
+        prevA.classList.remove('inactive')
+        nextA.classList.remove('inactive')
+        prevA.setAttribute('href', years[years.indexOf(activeYear()) - 1])
+        nextA.setAttribute('href', years[years.indexOf(activeYear()) + 1])
+      }
+    }
+
+    function updateFilling() {
+      //change .filling-line length according to the selected event
+      let filling = document.getElementById("filling-line")
+      let yearLi = document.querySelectorAll("#events li._" + activeYear())[0]
+      let eventWidth = yearLi.style.left
+      filling.style.setProperty("width", eventWidth)
+    }
+
+    function setActiveTimelinePoint() {
+      let yearA = document.querySelectorAll('._' + activeYear())[0].firstChild
+      Array.from(document.querySelectorAll('.selected')).forEach((el) => el.classList.remove('selected'));
+      yearA.classList.add('selected');
+    }
+
+    function setOlderEvents() {
+      let selected = document.querySelectorAll('.selected')[0].parentElement
+
+      while (selected = selected.previousElementSibling) {
+        selected.firstChild.classList.add('older-event')
+      }
+
+      selected = document.querySelectorAll('.selected')[0].parentElement
+      selected.firstChild.classList.remove('older-event')
+
+      while (selected = selected.nextElementSibling) {
+        selected.firstChild.classList.remove('older-event')
+      }
+    }
+
+    function scrollTimeline(direction) {
+      
+      let selected = document.querySelectorAll('.selected')[0]
+
+      if (!isInViewport(selected)) {
+        const style = getComputedStyle(selected.parentElement)
+        let translateValue = (style.left.replace('px',''))
+
+        if (selected.getBoundingClientRect().left < 0) {
+          document.getElementById('events-wrapper').scroll({
+            left: (translateValue - document.getElementById('events-wrapper').offsetWidth + 60),
+            behavior: 'smooth'
+          })
+        }
+        else {
+          document.getElementById('events-wrapper').scroll({
+            left: (translateValue - 60),
+            behavior: 'smooth'
+          })
+        }
+      }
+
+      function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+          rect.top >= 40 &&
+          rect.left >= 40 &&
+          rect.bottom <= ((window.innerHeight || document.documentElement.clientHeight) - 40) &&
+          rect.right <= ((window.innerWidth || document.documentElement.clientWidth) - 40)
+        );
+      }
+    }
+  }
+
+  function initTimeline() {
 
     addTimelineEvents()
+    updateTimeline()
 
-    // Set the selected event
-    let initialYear = document.querySelectorAll("#events li._" + year)[0]
-    setSelected(initialYear.firstChild)
-    
-    // Set the starting position of the fillingLine
-    updateFilling(initialYear, fillingLine)
-    
-    // Set inactive class on previous/next navigation if first or last year
-    if (year == years[0]) {
-      document.getElementById('prev-timeline').classList.add('inactive')
-    } 
-    else if (year == years[years.length - 1]) {
-      document.getElementById('next-timeline').classList.add('inactive')
-    }
-    
-    let translateValue = (getComputedStyle(initialYear).left.replace('px',''))
+    // Set default horizontal scroll so that the initial year is near the left side of the screen
+    let initialSelection = document.querySelectorAll("#events li._" + activeYear())[0]
+    let translateValue = (getComputedStyle(initialSelection).left.replace('px',''))
     document.getElementById('events-wrapper').scroll(translateValue - 60, 0)
     
-    // The timeline has been initialize - show it
+    // The timeline has been initialized - show it
     document.getElementById('timeline').classList.add('loaded')
 
     // Detect click on the previous arrow
     document.getElementById('prev-timeline').addEventListener('click', function (e) {
       e.preventDefault()
-      let prevLi = document.querySelectorAll('.selected')[0].parentElement.previousElementSibling
-      if (prevLi !== null) {
-        let prev = document.querySelectorAll('.selected')[0].parentElement.previousElementSibling.firstChild
-        setSelected(prev)
-        setOlderEvents(prev)
-        updateFilling(prev.parentElement, fillingLine)
-        setArrows(prev)
-        scrollTimeline('prev', prev)
-        setActiveYear(parseInt(prev.textContent))
+      if (prevYear()) {
+        setActiveYear(prevYear())
       }
     })
 
     // Detect click on the next arrow
-    
     document.getElementById('next-timeline').addEventListener('click', function (e) {
       e.preventDefault()
-      let nextLi = document.querySelectorAll('.selected')[0].parentElement.nextElementSibling
-      if (nextLi !== null) {
-        let next = document.querySelectorAll('.selected')[0].parentElement.nextElementSibling.firstChild
-        setSelected(next)
-        setOlderEvents(next)
-        updateFilling(next.parentElement, fillingLine)
-        setArrows(next)
-        scrollTimeline('next', next)
-        setActiveYear(parseInt(next.textContent))
+      if (nextYear()) {
+        setActiveYear(nextYear())
       }
     })
 
     // Detect click on a single event
-    
     document.getElementById("events-wrapper").addEventListener('click', function (e) {
       if (e.target !== null) {
-        if (e.target.tagName.toLowerCase() === 'button') {
+        if (e.target.tagName.toLowerCase() === 'a') {
           e.preventDefault();
-          //Remove selected class from all but selected
-          Array.from(document.querySelectorAll('.selected')).forEach((el) => el.classList.remove('selected'));
-          e.target.classList.add('selected');
-          //Add and remove older-event classes
-          setOlderEvents(e.target);
-          updateFilling(e.target.parentElement, fillingLine);
-          setArrows(e.target);
           setActiveYear(parseInt(e.target.textContent))
         }
       }
     })
-  }
 
-  function addTimelineEvents() {
+    function addTimelineEvents() {
     
     // Create an event for every item in the years array and place it on the timeline
     
@@ -492,8 +725,9 @@ function initialize(data, year) {
       const yearsFromStart = year - timelineStart;
       event.style.left = yearsFromStart / (timelineEnd - timelineStart) * 100 + '%'
       event.classList.add("_" + year)
-      let button = document.createElement('button');
+      let button = document.createElement('a');
       button.textContent = year;
+      button.setAttribute('href', year)
       event.appendChild(button);
       eventList.appendChild(event);
     }
@@ -516,69 +750,7 @@ function initialize(data, year) {
         left = left + 10
       }
     }
-  }
-
-  function setSelected(year) {
-    Array.from(document.querySelectorAll('.selected')).forEach((el) => el.classList.remove('selected'));
-    year.classList.add('selected');
-  }
-
-  function updateFilling(selectedEvent, filling) {
-    //change .filling-line length according to the selected event
-    let eventWidth = selectedEvent.style.left;
-    filling.style.setProperty("width", eventWidth);
-  }
-
-  function scrollTimeline(direction, selected) {
-    if (!isInViewport(selected)) {
-      const style = getComputedStyle(selected.parentElement)
-      let translateValue = (style.left.replace('px',''))
-      
-      if (direction == 'next') {
-        document.getElementById('events-wrapper').scroll({
-          left: (translateValue - 60),
-          behavior: 'smooth'
-        })
-      }
-      if (direction == 'prev') {
-        document.getElementById('events-wrapper').scroll({
-          left: (translateValue - document.getElementById('events-wrapper').offsetWidth + 60),
-          behavior: 'smooth'
-        })
-      }
     }
-  }
-
-  function setArrows(selected) {
-    if (selected.parentElement.previousElementSibling !== null) {
-      document.getElementById('prev-timeline').classList.remove('inactive')
-      if (selected.parentElement.nextElementSibling !== null){
-        document.getElementById('next-timeline').classList.remove('inactive')
-      }
-      else {
-        document.getElementById('next-timeline').classList.add('inactive')
-      }
-    }
-    else {
-      document.getElementById('prev-timeline').classList.add('inactive')
-    }
-  }
-
-  function setOlderEvents(target) {
-    let targetLi = target.parentElement
-    while (targetLi = targetLi.previousElementSibling) { targetLi.firstChild.classList.add('older-event'); }
-    targetLi = target.parentElement
-    while (targetLi = targetLi.nextElementSibling) { targetLi.firstChild.classList.remove('older-event'); }
-  }
-
-  function isInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-      rect.top >= 40 &&
-      rect.left >= 40 &&
-      rect.bottom <= ((window.innerHeight || document.documentElement.clientHeight) - 40) &&
-      rect.right <= ((window.innerWidth || document.documentElement.clientWidth) - 40)
-    );
   }
   
   /////////////////////// Getters //////////////////////////
@@ -637,42 +809,89 @@ function initialize(data, year) {
   
   ///////////////////////// Content Changes ////////////////////////
 
-  function setActiveYear(year) {
-    showYearContent(year)
-    filterMapBy(year)
+  function setActiveYear(year, preventPushState) {
+
+    if (preventPushState !== true) {
+      window.history.pushState(
+        {
+          "scope": "year",
+          "feature": null,
+          "cession": null,
+          "year": year
+        },
+        parseInt(year),
+        "/" + year
+      )
+    }
+    updateTimeline()
+    showYearContent()
     fitMapTo(year)
+    filterMapByActiveYear()
     removeSelectionHighlight()
-    window.history.pushState({"scope": "year", "value": year}, "", "/" + year)
   }
   
-  function setActiveCession(cession) {
-    showCessionContent(cession)
+  function setActiveCession(cession, preventPushState) {
+    
+    if (preventPushState !== true) { 
+      window.history.pushState(
+        {
+          "scope": "cession",
+          "feature": null,
+          "cession": cession.properties.slug,
+          "year": cession.properties.startYear
+        },
+        cession.properties.name,
+        "/" + cession.properties.startYear + "/" + cession.properties.slug
+      )
+    }
+    updateTimeline()
+    showCessionContent()
     fitMapTo(cession)
-    removeSelectionHighlight()
-    window.history.pushState({"scope": "cession", "value": cession.properties.slug}, "", "/" + cession.properties.startYear + "/" + cession.properties.slug)
+    filterMapByActiveYear()
+    removeSelectionHighlight()   
   }
   
-  function setActiveFeature(feature) {
-    showFeatureContent(feature)
-    addSelectionHighlightTo(feature)
+  function setActiveFeature(feature, preventPushState) {
+    
+    //If feature is selected from map, use the matching GeoJSON feature instead
+    if (feature._vectorTileFeature) {
+      feature = getGeojsonMatchOf(feature)
+    }
+
+    if (preventPushState !== true) {
+      window.history.pushState(
+        {
+          "scope": "feature", 
+          "feature": feature.properties.slug,
+          "cession": parentCessionOf(feature).properties.slug, //Referencing the parent cession because feature.properties.cession is a proper name and not a slug
+          "year": feature.properties.year
+        },
+        feature.properties.name,
+        "/" + feature.properties.year + "/" + parentCessionOf(feature).properties.slug + "/" + feature.properties.slug
+      )
+    }
+    console.log(activeFeature())
+    updateTimeline()
+    showFeatureContent()
     fitMapTo(feature)
-    window.history.pushState({"scope": "feature", "value": feature.properties.slug}, "", "/" + feature.properties.year + "/" + parentCessionOf(feature).properties.slug + "/" + feature.properties.slug)
+    filterMapByActiveYear()
+    addSelectionHighlightTo(activeFeature())
   }
   
   ///////////////////////// Sidebar Content ////////////////////////
   
-  function showYearContent(year) {  
+  function showYearContent() {  
     clearSidebarContent()
 
     let sidebarContent = document.querySelector('#sidebar-content')
     
     ///////// Breadcrumb //////////
     
-    sidebarContent.appendChild(breadcrumbs(year))
+    sidebarContent.appendChild(breadcrumbs(activeYear()))
 
     ///////// Cessions //////////
     
-    let cessions = cessionsOf(year)
+    let cessions = cessionsOf(activeYear())
     for (let i = 0; i < cessions.length; i++) {
       const cession = cessions[i]
       
@@ -754,9 +973,9 @@ function initialize(data, year) {
     }
   }
   
-  function showCessionContent(cession) {
-    showYearContent(cession.properties.startYear)
-    document.getElementById(cession.properties.slug).scrollIntoView(
+  function showCessionContent() {
+    showYearContent()
+    document.getElementById(activeCession().properties.slug).scrollIntoView(
       //{block: 'nearest'}
       //{behavior: 'smooth'}
     )
@@ -764,14 +983,11 @@ function initialize(data, year) {
     //location.hash = "#" + cession.properties.slug
   }
   
-  function showFeatureContent(feature) {  
+  function showFeatureContent() {  
     clearSidebarContent()
     
-    //If feature is selected from map, use the matching GeoJSON feature instead
-    if (feature._vectorTileFeature) {
-      feature = getGeojsonMatchOf(feature)
-    }
-    
+    let feature = activeFeature()
+
     let sidebarWrapper = document.querySelector('#sidebar-wrapper')
     let sidebarContent = document.querySelector('#sidebar-content')
     
@@ -1085,26 +1301,26 @@ function initialize(data, year) {
   
   ///////////////////////// Map Updates ////////////////////////////
   
-  function filterMapBy(year) {
+  function filterMapByActiveYear() {
     //Create a filter for a range of years; used for features that should accumulate over time
-    let yearRangeFilter = ['all', ['>=', year, ['get', 'startYear']], ['>', ['get', 'endYear'], year]]
+    let yearRangeFilter = ['all', ['>=', activeYear(), ['get', 'startYear']], ['>', ['get', 'endYear'], activeYear()]]
     map.setFilter('ceded-areas', yearRangeFilter)
     map.setFilter('context-points', yearRangeFilter)
     map.setFilter('context-points-highlight', yearRangeFilter)
     map.setFilter('context-points-symbol', yearRangeFilter)
     
-    if (year !== years[0]) {
+    if (activeYear() !== years[0]) {
       map.setPaintProperty(
         'ceded-areas', 'fill-color', [
           'case',
-          ['all', ['==', ['get', "startYear"], year], ['==', ['get', "newOrExisting"], "new"]],
+          ['all', ['==', ['get', "startYear"], activeYear()], ['==', ['get', "newOrExisting"], "new"]],
           colors.cession,
           '#000000'
         ])
     };
 
     //Create a filter for a single year; used for features that should only appear on a specific year
-    let currentYearFilter = ['==', year, ['get', 'year']]
+    let currentYearFilter = ['==', activeYear(), ['get', 'year']]
     map.setFilter('boundary-lines', currentYearFilter)
     map.setFilter('boundary-lines-highlight', currentYearFilter)
     map.setFilter('boundary-lines-fill', ["all", currentYearFilter, ["any", ["!=", ["get", "surveyed"], "No"], ["!=", ["get", "natural"], "No"]]])
@@ -1271,6 +1487,10 @@ function initialize(data, year) {
     removeSelectionHighlight()
     
     selectedFeatureId = feature.id
+    // console.log("selectedFeatureId: " + selectedFeatureId)
+    // console.log("feature: " + feature)
+    // console.log("feature.geometry.type: " + feature.geometry.type)
+    // console.log("feature.source: " + feature.source)
     if (feature.geometry.type == "LineString") {
       map.setFeatureState(
         { source: 'boundary-lines', sourceLayerId: 'boundary-lines-highlight', id: selectedFeatureId },
@@ -1278,13 +1498,15 @@ function initialize(data, year) {
       )
     }
     else if (feature.geometry.type == "Point") {
-      if (feature.source == "boundary-points") {
+
+      if (feature.properties.cession) { //Hacky way to see if point feature is a boundary point and not a context point
+        console.log("is feature")
         map.setFeatureState(
           { source: 'boundary-points', sourceLayerId: 'boundary-points-highlight', id: selectedFeatureId },
           { selected: true }
         )
       }
-      else if (feature.source == "context-points") {
+      else {
         map.setFeatureState(
           { source: 'context-points', sourceLayerId: 'context-points-highlight', id: selectedFeatureId },
           { selected: true }
@@ -1400,11 +1622,50 @@ function initialize(data, year) {
     }
   }
   
-  ///////////////////////// Map Interactions /////////////////////////
+  ///////////////////////// Browser Navigation /////////////////////////
   
   window.onpopstate = function(event) {
-    console.log(`location: ${document.location}, state: ${JSON.stringify(event.state)}`)
+
+    if (event.state !== null) {
+      console.log("An event state exists")
+      console.log(`location: ${document.location}, state: ${JSON.stringify(event.state)}`)
+
+      if (event.state.scope == "year") {
+        setActiveYear(parseInt(event.state.year), true)
+      }
+
+      else if (event.state.scope == "cession") {
+        let cession = data.cededAreas.features.find(cessions => cessions.properties.slug === event.state.cession)
+        setActiveCession(cession, true)
+      }
+
+      else if (scope == "feature") {
+
+      }
+    }
+    else {
+      console.log("No event state exists")
+      if (initial.scope == "year") {
+        setActiveYear(parseInt(initial.year), true)
+
+      }
+
+      else if (initial.scope == "cession") {
+        let cession = data.cededAreas.features.find(cessions => cessions.properties.slug === initial.cession.slug)
+
+        console.log(cession) 
+        setActiveCession(cession, true)
+      }
+
+      else if (scope == "feature") {
+
+      }
+    }
+    
+    
   }
+
+  ///////////////////////// Map Interactions /////////////////////////
 
   map.on("click", selectFeatureFromMap)
   
@@ -1430,7 +1691,7 @@ function expandMap () {
   if (!document.body.contains(document.getElementById('return'))) {
 
     document.getElementById('mobile-scrim').classList.add('map-expanded')
-    document.getElementById('cd-horizontal-timeline').classList.add('map-expanded')
+    document.getElementById('timeline-section').classList.add('map-expanded')
     document.getElementById('sidebar-wrapper').classList.add('map-expanded')
 
     let main = document.getElementById('main')
@@ -1451,7 +1712,7 @@ function collapseMap () {
   if (document.body.contains(document.getElementById('return'))) {
 
     document.getElementById('mobile-scrim').classList.remove('map-expanded')
-    document.getElementById('cd-horizontal-timeline').classList.remove('map-expanded')
+    document.getElementById('timeline-section').classList.remove('map-expanded')
     document.getElementById('sidebar-wrapper').classList.remove('map-expanded')
 
     let main = document.getElementById('main')
