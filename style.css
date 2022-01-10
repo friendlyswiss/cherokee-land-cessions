@@ -100,9 +100,6 @@ span.citation {
   padding-right: 10px;
   cursor: default; }
 
-.feature-name {
-  margin-top: 10px; }
-
 #main {
   position: absolute;
   top: 40px;
@@ -290,10 +287,14 @@ div.mapboxgl-popup-content p {
   flex-basis: 0;
   margin-right: 20px; }
 
-#sidebar-content .feature button.feature-name {
+#sidebar-content .feature a.feature-name {
   flex-grow: 8;
   flex-basis: 0;
-  margin-right: 10px; }
+  margin-right: 10px;
+  text-decoration: none;
+  color: black;
+  font-size: 15px;
+  line-height: 1.2; }
 
 .line .thumbnail hr {
   border: none;
@@ -318,11 +319,15 @@ div.mapboxgl-popup-content p {
   background: #f5f5f5;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); }
 
-#feature-navigation button.prev-feature,
-#feature-navigation button.next-feature {
+#feature-navigation a.prev-feature,
+#feature-navigation a.next-feature {
   box-sizing: border-box;
   position: absolute;
   display: block;
+  font-size: 15px;
+  line-height: 1.2;
+  text-decoration: none;
+  color: black;
   transform: scale(var(--ggs, 1));
   width: 22px;
   height: 22px;
@@ -330,8 +335,8 @@ div.mapboxgl-popup-content p {
   border-radius: 100px;
   top: 14px; }
 
-#feature-navigation button.prev-feature::after,
-#feature-navigation button.next-feature::after {
+#feature-navigation a.prev-feature::after,
+#feature-navigation a.next-feature::after {
   content: "";
   display: block;
   box-sizing: border-box;
@@ -343,26 +348,26 @@ div.mapboxgl-popup-content p {
   left: 6px;
   top: 4px; }
 
-#feature-navigation button.prev-feature {
+#feature-navigation a.prev-feature {
   left: 20px; }
 
-#feature-navigation button.next-feature {
+#feature-navigation a.next-feature {
   right: 20px; }
 
-#feature-navigation button.prev-feature:after {
+#feature-navigation a.prev-feature:after {
   transform: rotate(45deg); }
 
-#feature-navigation button.next-feature:after {
+#feature-navigation a.next-feature:after {
   transform: rotate(-135deg); }
 
-#feature-navigation button.prev-feature:before {
+#feature-navigation a.prev-feature:before {
   position: absolute;
   content: "Previous Feature";
   left: 20px;
   width: 130px;
   top: -1px; }
 
-#feature-navigation button.next-feature:before {
+#feature-navigation a.next-feature:before {
   position: absolute;
   content: "Next Feature";
   text-align: right;
@@ -370,8 +375,7 @@ div.mapboxgl-popup-content p {
   width: 100px;
   top: -1px; }
 
-#feature-navigation button.inactive {
-  cursor: not-allowed;
+#feature-navigation a.inactive {
   opacity: 40%; }
 
 /* -------------------------------- 
@@ -644,8 +648,9 @@ div.feature-popup .context-feature span {
   font-weight: bold;
   margin-top: 12px; }
 
-#main button.info-icon,
+#main a.info-icon,
 #main button.close {
+  color: black;
   flex-shrink: 0;
   box-sizing: border-box;
   position: relative;
@@ -658,8 +663,8 @@ div.feature-popup .context-feature span {
   margin-left: 8px;
   top: 3px; }
 
-#main button.info-icon::after,
-#main button.info-icon::before {
+#main a.info-icon::after,
+#main a.info-icon::before {
   content: "";
   display: block;
   box-sizing: border-box;
@@ -669,11 +674,11 @@ div.feature-popup .context-feature span {
   background: currentColor;
   left: 7px; }
 
-#main button.info-icon::after {
+#main a.info-icon::after {
   bottom: 2px;
   height: 8px; }
 
-#main button.info-icon::before {
+#main a.info-icon::before {
   height: 2px;
   top: 2px; }
 
@@ -838,19 +843,21 @@ button.close-icon {
   #sidebar-wrapper .fit-to:hover {
     color: #83C4BE; }
 
-  #sidebar-wrapper .feature-name:hover {
+  #sidebar-wrapper a.feature-name:hover {
     color: #77AFA8; }
 
-  #sidebar-wrapper button:hover {
+  #sidebar-wrapper a:hover {
     color: #83C4BE; }
 
-  #feature-navigation button:hover::before,
-  #feature-navigation button:hover::after {
-    color: #77AFA8; }
+  #feature-navigation a:hover::before,
+  #feature-navigation a:hover::after {
+    color: #77AFA8;
+    cursor: pointer; }
 
-  #feature-navigation button.inactive:hover::before,
-  #feature-navigation button.inactive:hover::after {
-    color: black; }
+  #feature-navigation a.inactive:hover::before,
+  #feature-navigation a.inactive:hover::after {
+    color: black;
+    cursor: not-allowed; }
 
   #timeline-section #events a:hover {
     visibility: visible; }
@@ -866,7 +873,7 @@ button.close-icon {
     color: black;
     cursor: not-allowed; }
 
-  #main button.info-icon:hover {
+  #main a.info-icon:hover {
     color: #83C4BE; } }
 #mobile-scrim.map-expanded {
   display: none; }

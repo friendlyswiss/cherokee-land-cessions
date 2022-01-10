@@ -28,6 +28,9 @@ const years = [
   1835
 ]
 
+// The title of the application
+appTitle = "Atlas of Cherokee Land Loss 1715–1835"
+
 // Determine the start and end of the timeline
 const timelineStart = 1712
 const timelineEnd = 1838
@@ -356,66 +359,8 @@ function initialize(data) {
 
   })
   
-  ///////////////////// Application States ///////////////////////
+    ///////////////////////// App States ////////////////////////
 
-  function activeYear() {
-    let year
-    if (history.state !== null) {
-      year = history.state.year
-    }
-    else {
-      year = initial.year
-    }
-    return year
-  }
-
-  function prevYear() {
-    let year
-    if (activeYear() == years[0]) {
-      year = null
-    }
-    else {
-      year = years[years.indexOf(activeYear()) - 1]
-    }
-    return year
-  }
-
-  function nextYear() {
-    let year
-    if (activeYear() == years[years.length - 1]) {
-      year = null
-    }
-    else {
-      year = years[years.indexOf(activeYear()) + 1]
-    }
-    return year
-  }
-
-  function activeCession() {
-    let cession
-    if (history.state !== null) {
-      cession = data.cededAreas.features.find(x => x.properties.slug === history.state.cession)
-    }
-    else {
-      cession = initial.cession
-    }
-    return cession
-  }
-
-  function activeFeature() {
-    let feature
-    if (history.state !== null) {
-      feature = data.boundaryLines.features.find(x => x.properties.slug === history.state.feature)
-      if (feature == null) {
-        feature = data.boundaryPoints.features.find(x => x.properties.slug === history.state.feature)
-      }
-    }
-    else {
-      feature = initial.feature
-    }
-    return feature
-  }
-  
   function setInitialStateFromURL() { // Read the initial state from the URL
     
     // Get pathname from target URL
@@ -423,7 +368,7 @@ function initialize(data) {
     // Remove starting "/"
     path = path.substring(1)
     // Remove ending "/" if it exists
-    if (path.charAt(path.length -1) == "/") {
+    if (path.charAt(path.length - 1) == "/") {
       path = path.substring(0, path.length - 1);
     }
     
@@ -447,6 +392,7 @@ function initialize(data) {
           initial.scope = "year"
           initial.year = parseInt(pathArray[0])
           initial.bounds = getYearBounds(initial.year)
+          setYearTags()
           showYearContent()
           initTimeline()
         }
@@ -464,6 +410,7 @@ function initialize(data) {
           if (initial.year === parseInt(pathArray[0])) {
             initial.scope = "cession"
             initial.bounds = getCessionBounds(initial.cession)
+            setCessionTags()
             showCessionContent()
             initTimeline()
           }
@@ -501,6 +448,7 @@ function initialize(data) {
           initial.year = initial.cession.properties.startYear
           if (initial.feature.properties.cession === initial.cession.properties.name && initial.year === parseInt(pathArray[0])) {
             selectedFeatureId = initial.feature.id
+            setFeatureTags()
             showFeatureContent(initial.feature)
             initTimeline()
           }
@@ -568,6 +516,153 @@ function initialize(data) {
       }
     }
   }
+
+  function setActiveYear(year, preventPushState) {
+
+    if (preventPushState !== true) {
+      window.history.pushState(
+        {
+          "scope": "year",
+          "feature": null,
+          "cession": null,
+          "year": year
+        },
+        parseInt(year),
+        "/" + year
+      )
+    }
+    setYearTags()
+    updateTimeline()
+    showYearContent()
+    fitMapTo(year)
+    filterMapByActiveYear()
+    removeSelectionHighlight()
+  }
+  
+  function setActiveCession(cession, preventPushState) {
+    
+    if (preventPushState !== true) { 
+      window.history.pushState(
+        {
+          "scope": "cession",
+          "feature": null,
+          "cession": cession.properties.slug,
+          "year": cession.properties.startYear
+        },
+        cession.properties.name,
+        "/" + cession.properties.startYear + "/" + cession.properties.slug
+      )
+    }
+    setCessionTags()
+    updateTimeline()
+    showCessionContent()
+    fitMapTo(cession)
+    filterMapByActiveYear()
+    removeSelectionHighlight()   
+  }
+  
+  function setActiveFeature(feature, preventPushState) {
+    
+    //If feature is selected from map, use the matching GeoJSON feature instead
+    if (feature._vectorTileFeature) {
+      feature = getGeojsonMatchOf(feature)
+    }
+
+    if (preventPushState !== true) {
+      window.history.pushState(
+        {
+          "scope": "feature", 
+          "feature": feature.properties.slug,
+          "cession": parentCessionOf(feature).properties.slug, //Referencing the parent cession because feature.properties.cession is a proper name and not a slug
+          "year": feature.properties.year
+        },
+        feature.properties.name,
+        "/" + feature.properties.year + "/" + parentCessionOf(feature).properties.slug + "/" + feature.properties.slug
+      )
+    }
+    setFeatureTags()
+    updateTimeline()
+    showFeatureContent()
+    fitMapTo(feature)
+    filterMapByActiveYear()
+    addSelectionHighlightTo(activeFeature())
+  }
+
+  function activeYear() {
+    let year
+    if (history.state !== null) {
+      year = history.state.year
+    }
+    else {
+      year = initial.year
+    }
+    return year
+  }
+
+  function prevYear() {
+    let year
+    if (activeYear() == years[0]) {
+      year = null
+    }
+    else {
+      year = years[years.indexOf(activeYear()) - 1]
+    }
+    return year
+  }
+
+  function nextYear() {
+    let year
+    if (activeYear() == years[years.length - 1]) {
+      year = null
+    }
+    else {
+      year = years[years.indexOf(activeYear()) + 1]
+    }
+    return year
+  }
+
+  function activeCession() {
+    let cession
+    if (history.state !== null) {
+      cession = data.cededAreas.features.find(x => x.properties.slug === history.state.cession)
+    }
+    else {
+      cession = initial.cession
+    }
+    return cession
+  }
+
+  function activeFeature() {
+    let feature
+    if (history.state !== null) {
+      feature = data.boundaryLines.features.find(x => x.properties.slug === history.state.feature)
+      if (feature == null) {
+        feature = data.boundaryPoints.features.find(x => x.properties.slug === history.state.feature)
+      }
+    }
+    else {
+      feature = initial.feature
+    }
+    return feature
+  }
+  
+  function setYearTags() {
+    document.title = activeYear() + " | " + appTitle
+    let description = ""
+    document.querySelector('meta[name="description"]').setAttribute("content", description)
+  }
+
+  function setCessionTags() {
+    document.title = activeCession().properties.name + " | " + appTitle
+    let description = ""
+    document.querySelector('meta[name="description"]').setAttribute("content", description)
+  }
+
+  function setFeatureTags() {
+    document.title = activeFeature().properties.name + " | " + appTitle
+    let description = ""
+    document.querySelector('meta[name="description"]').setAttribute("content", description)
+  }
   
   function getSources() {
     let sources = []
@@ -597,19 +692,19 @@ function initialize(data) {
         prevA.classList.add('inactive')
         nextA.classList.remove('inactive')
         prevA.removeAttribute('href')
-        nextA.setAttribute('href', years[1])
+        nextA.href = years[1]
       } 
       else if (activeYear() == years[years.length - 1]) {
         prevA.classList.remove('inactive')
         nextA.classList.add('inactive')
         nextA.removeAttribute('href')
-        prevA.setAttribute('href', years[years.length - 2])
+        prevA.href = years[years.length - 2]
       }
       else {
         prevA.classList.remove('inactive')
         nextA.classList.remove('inactive')
-        prevA.setAttribute('href', years[years.indexOf(activeYear()) - 1])
-        nextA.setAttribute('href', years[years.indexOf(activeYear()) + 1])
+        prevA.href = "/" + years[years.indexOf(activeYear()) - 1]
+        nextA.href = "/" + years[years.indexOf(activeYear()) + 1]
       }
     }
 
@@ -719,17 +814,17 @@ function initialize(data) {
     
     // Create an event for every item in the years array and place it on the timeline
     
-    let eventList = document.querySelectorAll('#events ol')[0];
+    let eventList = document.querySelectorAll('#events ol')[0]
     for (const year of years) { 
-      let event = document.createElement('li');
-      const yearsFromStart = year - timelineStart;
+      let event = document.createElement('li')
+      const yearsFromStart = year - timelineStart
       event.style.left = yearsFromStart / (timelineEnd - timelineStart) * 100 + '%'
       event.classList.add("_" + year)
-      let button = document.createElement('a');
-      button.textContent = year;
-      button.setAttribute('href', year)
-      event.appendChild(button);
-      eventList.appendChild(event);
+      let button = document.createElement('a')
+      button.textContent = year
+      button.href = "/" + year
+      event.appendChild(button)
+      eventList.appendChild(event)
     }
     
     // Add decade labels to the timeline
@@ -806,78 +901,12 @@ function initialize(data) {
       return matchingFeatures[0]
     }
   }
-  
-  ///////////////////////// Content Changes ////////////////////////
 
-  function setActiveYear(year, preventPushState) {
-
-    if (preventPushState !== true) {
-      window.history.pushState(
-        {
-          "scope": "year",
-          "feature": null,
-          "cession": null,
-          "year": year
-        },
-        parseInt(year),
-        "/" + year
-      )
-    }
-    updateTimeline()
-    showYearContent()
-    fitMapTo(year)
-    filterMapByActiveYear()
-    removeSelectionHighlight()
+  function featureURL(feature) {
+    return "/" + feature.properties.year + "/" + parentCessionOf(feature).properties.slug + "/" + feature.properties.slug
   }
   
-  function setActiveCession(cession, preventPushState) {
-    
-    if (preventPushState !== true) { 
-      window.history.pushState(
-        {
-          "scope": "cession",
-          "feature": null,
-          "cession": cession.properties.slug,
-          "year": cession.properties.startYear
-        },
-        cession.properties.name,
-        "/" + cession.properties.startYear + "/" + cession.properties.slug
-      )
-    }
-    updateTimeline()
-    showCessionContent()
-    fitMapTo(cession)
-    filterMapByActiveYear()
-    removeSelectionHighlight()   
-  }
-  
-  function setActiveFeature(feature, preventPushState) {
-    
-    //If feature is selected from map, use the matching GeoJSON feature instead
-    if (feature._vectorTileFeature) {
-      feature = getGeojsonMatchOf(feature)
-    }
 
-    if (preventPushState !== true) {
-      window.history.pushState(
-        {
-          "scope": "feature", 
-          "feature": feature.properties.slug,
-          "cession": parentCessionOf(feature).properties.slug, //Referencing the parent cession because feature.properties.cession is a proper name and not a slug
-          "year": feature.properties.year
-        },
-        feature.properties.name,
-        "/" + feature.properties.year + "/" + parentCessionOf(feature).properties.slug + "/" + feature.properties.slug
-      )
-    }
-    console.log(activeFeature())
-    updateTimeline()
-    showFeatureContent()
-    fitMapTo(feature)
-    filterMapByActiveYear()
-    addSelectionHighlightTo(activeFeature())
-  }
-  
   ///////////////////////// Sidebar Content ////////////////////////
   
   function showYearContent() {  
@@ -971,6 +1000,81 @@ function initialize(data) {
       cessionDetails.appendChild(featureList)      
       sidebarContent.appendChild(cessionDetails);
     }
+
+    function createListFrom(features) {
+    
+      ////// Feature List //////
+      
+      let featureList = document.createElement('div')
+      featureList.classList.add('boundary-features')
+      let featuresHeading = document.createElement('h4')
+      featuresHeading.textContent = "Boundary Features"
+      featureList.appendChild(featuresHeading)
+      
+      //// All Features ////
+      
+      for (let i = 0; i < features.length; i++) {
+        let feature = features[i]
+        let featureDiv = document.createElement('div')
+        let featureThumbnail = document.createElement('div')
+        featureThumbnail.classList.add('thumbnail')
+        featureDiv.appendChild(featureThumbnail)
+        
+        // Feature Name //
+        
+        let featureName = document.createElement('a')
+        featureName.classList.add('feature-name')
+        featureName.href = featureURL(feature)
+        featureName.textContent = i + 1 + ". " + feature.properties.name
+        featureName.addEventListener('click', function (e) {
+          e.preventDefault()
+          setActiveFeature(feature)
+        })
+        featureDiv.appendChild(featureName)
+        
+        // Zoom Button //
+        
+        let zoom = document.createElement('button')
+        zoom.addEventListener('click', function () {
+          fitMapTo(feature)
+        })
+        
+        //// Point Thumbnail & Zoom Title ////
+        
+        if (feature.geometry.type == "Point") {          
+          featureDiv.classList.add('feature', 'point')
+          
+          let dot = document.createElement('span')
+          if (feature.properties.confidence) {
+            dot.style.background = colors[feature.properties.confidence.toLowerCase()]
+          }
+          featureThumbnail.appendChild(dot)
+          
+          zoom.classList.add('point-zoom', 'fit-to')
+          zoom.title = "Zoom to Point"
+          featureDiv.appendChild(zoom)
+        }
+
+        //// Line Thumbnail & Zoom Title ////
+        
+        if (feature.geometry.type == "LineString") {          
+          featureDiv.classList.add('feature', 'line')
+          
+          let line = document.createElement('hr')
+          if (features[i].properties.confidence) {
+            line.style.borderTop = "3px " + lineStyle(feature) + " " + colors[feature.properties.confidence.toLowerCase()]
+          }
+          featureThumbnail.appendChild(line)
+          
+          zoom.classList.add('line-zoom', 'fit-to')
+          zoom.title = "Zoom to Line"
+          featureDiv.appendChild(zoom)
+        }
+        
+        featureList.appendChild(featureDiv)
+      }
+      return featureList
+    }
   }
   
   function showCessionContent() {
@@ -1007,7 +1111,7 @@ function initialize(data) {
     //// Feature Name ////
     
     let featureName = document.createElement('h3')
-    featureName.classList.add('feature-name')
+    //featureName.classList.add('feature-name')
     featureName.textContent = feature.properties.name
     featureHeader.appendChild(featureName)
     
@@ -1087,14 +1191,17 @@ function initialize(data) {
     
     let prevLi = document.createElement('li')
     featureNavigationUl.appendChild(prevLi)
-    let prev = document.createElement('button')
+    let prev = document.createElement('a')
     prev.classList.add('prev-feature')
     if (!feature.properties.order || isFirst == true) {
       prev.classList.add('inactive')
     }
     else {
-      prev.addEventListener('click', function () {
-        let prevFeature = features[feature.properties.order - 2]
+      let prevFeature = features[feature.properties.order - 2]
+      prev.href = featureURL(feature)
+      prev.addEventListener('click', function (e) {
+        e.preventDefault()
+        
         if (prevFeature) {
           setActiveFeature(prevFeature)
         }
@@ -1107,15 +1214,21 @@ function initialize(data) {
     
     let nextLi = document.createElement('li')
     featureNavigationUl.appendChild(nextLi)
-    let next = document.createElement('button')
+    let next = document.createElement('a')
     next.classList.add('next-feature')
     if (!feature.properties.order || isLast == true) {
       next.classList.add('inactive')
     }
     else {
-      next.addEventListener('click', function () {
-        let nextFeature = features[feature.properties.order] 
-        setActiveFeature(nextFeature)
+      let nextFeature = features[feature.properties.order] 
+      next.href = featureURL(feature)
+      next.addEventListener('click', function (e) {
+        e.preventDefault()
+
+        if (nextFeature) {
+          setActiveFeature(nextFeature)
+        }
+        else { console.log("Next feature is null") }
       })
     }
     nextLi.appendChild(next)
@@ -1178,79 +1291,6 @@ function initialize(data) {
     return metadataDiv
   }
   
-  function createListFrom(features) {
-    
-    ////// Feature List //////
-    
-    let featureList = document.createElement('div')
-    featureList.classList.add('boundary-features')
-    let featuresHeading = document.createElement('h4')
-    featuresHeading.textContent = "Boundary Features"
-    featureList.appendChild(featuresHeading)
-    
-    //// All Features ////
-    
-    for (let i = 0; i < features.length; i++) {
-      let feature = features[i]
-      let featureDiv = document.createElement('div')
-      let featureThumbnail = document.createElement('div')
-      featureThumbnail.classList.add('thumbnail')
-      featureDiv.appendChild(featureThumbnail)
-      
-      // Feature Name //
-      
-      let featureName = document.createElement('button')
-      featureName.classList.add('feature-name')
-      featureName.textContent = i + 1 + ". " + feature.properties.name
-      featureName.addEventListener('click', function () {
-        setActiveFeature(feature)
-      })
-      featureDiv.appendChild(featureName)
-      
-      // Zoom Button //
-      
-      let zoom = document.createElement('button')
-      zoom.addEventListener('click', function () {
-        fitMapTo(feature)
-      })
-      
-      //// Point Thumbnail & Zoom Title ////
-      
-      if (feature.geometry.type == "Point") {          
-        featureDiv.classList.add('feature', 'point')
-        
-        let dot = document.createElement('span')
-        if (feature.properties.confidence) {
-          dot.style.background = colors[feature.properties.confidence.toLowerCase()]
-        }
-        featureThumbnail.appendChild(dot)
-        
-        zoom.classList.add('point-zoom', 'fit-to')
-        zoom.title = "Zoom to Point"
-        featureDiv.appendChild(zoom)
-      }
-
-      //// Line Thumbnail & Zoom Title ////
-      
-      if (feature.geometry.type == "LineString") {          
-        featureDiv.classList.add('feature', 'line')
-        
-        let line = document.createElement('hr')
-        if (features[i].properties.confidence) {
-          line.style.borderTop = "3px " + lineStyle(feature) + " " + colors[feature.properties.confidence.toLowerCase()]
-        }
-        featureThumbnail.appendChild(line)
-        
-        zoom.classList.add('line-zoom', 'fit-to')
-        zoom.title = "Zoom to Line"
-        featureDiv.appendChild(zoom)
-      }
-      
-      featureList.appendChild(featureDiv)
-    }
-    return featureList
-  }
-  
   function formatCitations(descriptionTextNode) {
     let as = descriptionTextNode.querySelectorAll('a')
     for (const a of as) {
@@ -1293,7 +1333,7 @@ function initialize(data) {
       template.appendChild(linkHeading)
       const link = document.createElement('a')
       link.textContent = reference.url
-      link.setAttribute('href', reference.url)
+      link.href = reference.url
       template.appendChild(link)
     }
     new Modal(template)
@@ -1417,7 +1457,7 @@ function initialize(data) {
   
   function selectFeatureFromMap(position) {
     
-    let features = map.queryRenderedFeatures(position.point, { layers: ['boundary-lines','boundary-points', 'context-points'] });
+    let features = map.queryRenderedFeatures(position.point, { layers: ['boundary-lines','boundary-points','context-points'] });
     if (features.length > 0) {
       
       // If a point and line overlap, the point will always be the top feature because of layer order
@@ -1431,9 +1471,11 @@ function initialize(data) {
         featureName.classList.add('popup-feature-name')
         featureName.textContent = topFeature.properties.name
         popupContent.appendChild(featureName)
-        let infoIcon = document.createElement('button')
+        let infoIcon = document.createElement('a')
         infoIcon.classList.add('info-icon')
+        infoIcon.href = featureURL(topFeature)
         infoIcon.addEventListener('click', function (e) {
+          e.preventDefault()
           setActiveFeature(topFeature)
           collapseMap()
           const popup = document.getElementsByClassName('mapboxgl-popup');
@@ -1487,10 +1529,6 @@ function initialize(data) {
     removeSelectionHighlight()
     
     selectedFeatureId = feature.id
-    // console.log("selectedFeatureId: " + selectedFeatureId)
-    // console.log("feature: " + feature)
-    // console.log("feature.geometry.type: " + feature.geometry.type)
-    // console.log("feature.source: " + feature.source)
     if (feature.geometry.type == "LineString") {
       map.setFeatureState(
         { source: 'boundary-lines', sourceLayerId: 'boundary-lines-highlight', id: selectedFeatureId },
@@ -1500,7 +1538,7 @@ function initialize(data) {
     else if (feature.geometry.type == "Point") {
 
       if (feature.properties.cession) { //Hacky way to see if point feature is a boundary point and not a context point
-        console.log("is feature")
+        
         map.setFeatureState(
           { source: 'boundary-points', sourceLayerId: 'boundary-points-highlight', id: selectedFeatureId },
           { selected: true }
@@ -1627,8 +1665,6 @@ function initialize(data) {
   window.onpopstate = function(event) {
 
     if (event.state !== null) {
-      console.log("An event state exists")
-      console.log(`location: ${document.location}, state: ${JSON.stringify(event.state)}`)
 
       if (event.state.scope == "year") {
         setActiveYear(parseInt(event.state.year), true)
@@ -1639,30 +1675,35 @@ function initialize(data) {
         setActiveCession(cession, true)
       }
 
-      else if (scope == "feature") {
-
+      else if (event.state.scope == "feature") {
+        let feature
+        feature = data.boundaryLines.features.find(x => x.properties.slug === event.state.feature)
+        if (feature == null) {
+          feature = data.boundaryPoints.features.find(x => x.properties.slug === event.state.feature)
+        }
+        setActiveFeature(feature, true)
       }
     }
     else {
-      console.log("No event state exists")
+
       if (initial.scope == "year") {
         setActiveYear(parseInt(initial.year), true)
-
       }
 
       else if (initial.scope == "cession") {
-        let cession = data.cededAreas.features.find(cessions => cessions.properties.slug === initial.cession.slug)
-
-        console.log(cession) 
+        let cession = data.cededAreas.features.find(cessions => cessions.properties.slug === initial.cession.properties.slug)
         setActiveCession(cession, true)
       }
 
-      else if (scope == "feature") {
-
+      else if (initial.scope == "feature") {
+        let feature
+        feature = data.boundaryLines.features.find(x => x.properties.slug === initial.feature.properties.slug)
+        if (feature == null) {
+          feature = data.boundaryPoints.features.find(x => x.properties.slug === initial.feature.properties.slug)
+        }
+        setActiveFeature(feature, true)
       }
     }
-    
-    
   }
 
   ///////////////////////// Map Interactions /////////////////////////
