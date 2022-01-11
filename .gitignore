@@ -3,5 +3,3 @@ style.scss
 style.css.map
 .sass-cache/*
 geojson-source/qgis-raw/*
-vendor
-.env
