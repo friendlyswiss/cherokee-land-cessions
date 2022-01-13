@@ -2,3 +2,5 @@
 style.scss
 .sass-cache/*
 geojson-source/qgis-raw/*
+vendor/
+.env
