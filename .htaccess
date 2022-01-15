@@ -19,4 +19,4 @@ RewriteRule ^ https://cherokeecessions.com/%{REQUEST_FILENAME} [R=301,L]
 # Force HTTPS and remove WWW 
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [OR,NC]
 RewriteCond %{https} off  
-RewriteRule ^(.*)$ https://cherokeecessions.com/index.html [R=301,L]
+RewriteRule ^(.*)$ /index.html [R=301,L]
