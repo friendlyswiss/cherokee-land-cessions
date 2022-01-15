@@ -1,7 +1,22 @@
-RewriteEngine On
+# RewriteEngine On
 
-RewriteBase /
-RewriteRule ^index.html$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.html [L]
+# RewriteBase /
+# RewriteRule ^index.html$ - [L]
+
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule . /index.html [L]
+
+
+#### Force HTTPS://WWW and remove trailing / from files ####
+## Turn on rewrite engine
+RewriteEngine on
+
+# Remove trailing slash from non-filepath urls
+RewriteCond %{REQUEST_URI} /(.+)/$
+RewriteRule ^ https://cherokeecessions.com/%{REQUEST_FILENAME} [R=301,L]
+
+# Force HTTPS and remove WWW 
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [OR,NC]
+RewriteCond %{https} off  
+RewriteRule ^(.*)$ https://cherokeecessions.com/index.html [R=301,L]
