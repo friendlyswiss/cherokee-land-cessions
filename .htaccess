@@ -18,7 +18,7 @@ RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
 
 # Remove trailing slash from non-filepath urls
 RewriteCond %{REQUEST_URI} /(.+)/$
-RewriteRule ^ https://cherokeecessions.com/%{REQUEST_FILENAME} [R=301,L]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_FILENAME} [R=301,L]
 
 RewriteRule ^index.html$ - [L]
 
