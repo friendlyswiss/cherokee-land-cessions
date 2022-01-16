@@ -14,7 +14,7 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # Redirect www to root
 RewriteBase /
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+RewriteRule ^(.*)$ https://%1/$1 [R=301]
 
 # Remove trailing slash from non-filepath urls
 # RewriteCond %{REQUEST_URI} /(.+)/$
