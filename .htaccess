@@ -4,13 +4,13 @@ RewriteBase /
 # Force HTTPS and remove WWW 
 # RewriteCond %{HTTP_HOST} ^www\.(.*)$ [OR,NC]
 RewriteCond %{HTTPS} off  
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-RewriteRule ^index.html$ - [L]
+# RewriteRule ^index.html$ - [L]
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.html [L]
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule . /index.html [L]
 
 
 #### Force HTTPS://WWW and remove trailing / from files ####
