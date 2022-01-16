@@ -7,7 +7,8 @@ RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
 # ...or just a plain old http request directly from the client
 RewriteCond %{HTTP:X-Forwarded-Proto} =""
 RewriteCond %{HTTPS} !=on
-RewriteCond %{HTTP_HOST} !=localhost
+RewriteCond %{HTTP_HOST} !^localhost(?::\d+)?$ [NC]
+RewriteCond %{HTTP_HOST} !^127\.0\.0\.1(?::\d+)?$
 
 # Redirect to https version
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
