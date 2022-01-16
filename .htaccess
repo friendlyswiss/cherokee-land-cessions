@@ -20,10 +20,10 @@ RewriteRule ^(.*)$ https://%1/$1 [R=301]
 # RewriteCond %{REQUEST_URI} /(.+)/$
 # RewriteRule ^ https://cherokeecessions.com/%{REQUEST_FILENAME} [R=301,L]
 
-# RewriteRule ^index.html$ - [L]
+RewriteRule ^index.html$ - [L]
 
-# RewriteCond %{REQUEST_FILENAME} !-f
-# RewriteCond %{REQUEST_FILENAME} !-d
-# RewriteRule . /index.html [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
 
 
