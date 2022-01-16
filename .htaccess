@@ -7,6 +7,7 @@ RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
 # ...or just a plain old http request directly from the client
 RewriteCond %{HTTP:X-Forwarded-Proto} =""
 RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP_HOST} !=localhost
 
 # Redirect to https version
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
@@ -21,8 +22,10 @@ RewriteCond %{REQUEST_URI} /(.+)/$
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)$ https://%{HTTP_HOST}/%1 [R=301,L]
 
+# If request is for the homepage, leave it alone
 RewriteRule ^index.html$ - [L]
 
+# Redirect all requests to index for single-page app
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.html [L]
