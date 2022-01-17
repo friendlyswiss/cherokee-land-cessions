@@ -399,6 +399,7 @@ function initialize(data) {
         else {
           // Send to 404 page
           console.log("404 – First part of path does not match a year")
+          window.location.href = '/not-found'
         }
       }
 

@@ -29,6 +29,7 @@ RewriteRule ^index.html$ - [L]
 # Redirect all requests to index for single-page app
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/not-found
 RewriteRule . /index.html [L]
 
 
