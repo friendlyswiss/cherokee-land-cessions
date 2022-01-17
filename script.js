@@ -399,7 +399,7 @@ function initialize(data) {
         else {
           // Send to 404 page
           console.log("404 – First part of path does not match a year")
-          window.location.href = '/not-found'
+          pageNotFound()
         }
       }
 
@@ -418,11 +418,13 @@ function initialize(data) {
           else {
             // Send to 404 page
             console.log("404 – Year and cession do not match")
+            pageNotFound()
           }
         } 
         else { 
           // Send to 404 page
           console.log("404 – First part of path is not a year or second part of path does not match a cession")
+          pageNotFound()
         }
       }
 
@@ -442,6 +444,7 @@ function initialize(data) {
         else { 
             // Send to 404 page
             console.log("404 – Third part of path does not match a line or point feature")
+            pageNotFound()
         }
         if (matchesCession(pathArray[1]) && matchesYear(pathArray[0])) {
           
@@ -456,17 +459,24 @@ function initialize(data) {
           else {
             // Send to 404 page
             console.log("404 – Feature and cession do not match or cession and year do not match")
+            pageNotFound()
           }
         }
         else {
           // Send to 404 page
           console.log("404 – First part of path is not a year or second part of path does not match a cession")
+          pageNotFound()
         }
       }
       else if (pathArray.length > 3) {
         // Send to 404 page
         console.log("404 – Paths longer than four parts do not exist")
+        pageNotFound()
       }
+    }
+
+    function pageNotFound() {
+      window.location.href = '/not-found'
     }
 
     function matchesYear(slug) {
