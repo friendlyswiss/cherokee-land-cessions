@@ -100,6 +100,10 @@ span.citation {
   padding-right: 10px;
   cursor: default; }
 
+#breadcrumbs a {
+  text-decoration: none;
+  color: black; }
+
 #main {
   position: absolute;
   top: 40px;
@@ -834,10 +838,10 @@ button.close-icon {
   .modal a:hover {
     color: #77AFA8; }
 
-  #breadcrumbs li:hover {
+  #breadcrumbs a:hover {
     color: #77AFA8; }
 
-  #breadcrumbs li:hover::before {
+  #breadcrumbs a:hover::before {
     color: black; }
 
   #sidebar-wrapper .fit-to:hover {

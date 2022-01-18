@@ -1269,19 +1269,24 @@ function initialize(data) {
     breadcrumbLink.href = "/" + year
     breadcrumbLink.textContent = year
     breadcrumbLink.addEventListener('click', function (e) {
+      e.preventDefault()
       setActiveYear(year)
     })
-    breadcrumbsYear.appendChild(breadcrumbLink)
+    breadcrumbYear.appendChild(breadcrumbLink)
     breadcrumbList.appendChild(breadcrumbYear)
 
     // If there is an active feature, add the name of its cession to the breadcrumb
     if (feature) {
       let breadcrumbCession = document.createElement('li')
       breadcrumbCession.id = 'cession'
-      breadcrumbCession.textContent = feature.properties.cession
-      breadcrumbCession.addEventListener('click', function (e) {
+      let breadcrumbCessionLink = document.createElement('a')
+      breadcrumbCessionLink.href = "/" + year + "/" + parentCessionOf(feature).properties.slug
+      breadcrumbCessionLink.textContent = feature.properties.cession
+      breadcrumbCessionLink.addEventListener('click', function (e) {
+        e.preventDefault()
         setActiveCession(parentCessionOf(feature))
       })
+      breadcrumbCession.appendChild(breadcrumbCessionLink)
       breadcrumbList.appendChild(breadcrumbCession)
     }
     breadcrumbsNav.appendChild(breadcrumbList)
