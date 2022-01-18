@@ -1256,19 +1256,22 @@ function initialize(data) {
   }
   
   function breadcrumbs(year, feature) {
-    let breadcrumbsNav = document.createElement('nav');
-    breadcrumbsNav.id = 'breadcrumbs';
-    let breadcrumbList = document.createElement('ul');
-    breadcrumbList.classList.add('breadcrumb-list');
-    breadcrumbsNav.appendChild(breadcrumbList);
+    let breadcrumbsNav = document.createElement('nav')
+    breadcrumbsNav.id = 'breadcrumbs'
+    let breadcrumbList = document.createElement('ul')
+    breadcrumbList.classList.add('breadcrumb-list')
+    breadcrumbsNav.appendChild(breadcrumbList)
 
     // Add the active year to the breadcrumb
-    let breadcrumbYear = document.createElement('li');
-    breadcrumbYear.id = 'year';
-    breadcrumbYear.textContent = year;
-    breadcrumbYear.addEventListener('click', function (e) {
+    let breadcrumbYear = document.createElement('li')
+    breadcrumbYear.id = 'year'
+    let breadcrumbLink = document.createElement('a')
+    breadcrumbLink.href = "/" + year
+    breadcrumbLink.textContent = year
+    breadcrumbLink.addEventListener('click', function (e) {
       setActiveYear(year)
     })
+    breadcrumbsYear.appendChild(breadcrumbLink)
     breadcrumbList.appendChild(breadcrumbYear)
 
     // If there is an active feature, add the name of its cession to the breadcrumb
