@@ -7,7 +7,7 @@
 { "type": "Feature", "properties": { "name": "Chauga", "startYear": 1715, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.16659, 34.60844 ] } },
 { "type": "Feature", "properties": { "name": "Seneca", "startYear": 1715, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -82.84732, 34.66024 ] } },
 { "type": "Feature", "properties": { "name": "Ninety-Six", "startYear": 1715, "endYear": 2000, "type": "other" }, "geometry": { "type": "Point", "coordinates": [ -82.01984, 34.14482 ] } },
-{ "type": "Feature", "properties": { "name": "Fort Prince George", "startYear": 1715, "endYear": 2000, "type": "fort" }, "geometry": { "type": "Point", "coordinates": [ -82.902, 34.859 ] } },
+{ "type": "Feature", "properties": { "name": "Fort Prince George", "startYear": 1753, "endYear": 1768, "type": "fort" }, "geometry": { "type": "Point", "coordinates": [ -82.902, 34.859 ] } },
 { "type": "Feature", "properties": { "name": "Keowee", "startYear": 1715, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -82.90227, 34.85387 ] } },
 { "type": "Feature", "properties": { "name": "Tugaloo", "startYear": 1715, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.24361, 34.62472 ] } },
 { "type": "Feature", "properties": { "name": "Toxaway", "startYear": 1715, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -82.91499, 34.93598 ] } },
