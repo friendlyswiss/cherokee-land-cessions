@@ -1188,11 +1188,13 @@ function initialize(data) {
     // Get sibling features
     const cession = parentCessionOf(feature)
     const features = featuresOf(cession)
+
+    features.sort((a, b) => (a.properties.order > b.properties.order) ? 1 : -1)
     
-    let isFirst = false
-    if (feature.properties.order == 1) {isFirst = true}
-    let isLast = false
-    if (feature.properties.order == features.length) {isLast = true}
+    // let isFirst = false
+    // if (feature.properties.order == 1) {isFirst = true}
+    // let isLast = false
+    // if (feature.properties.order == features.length) {isLast = true}
     
     let featureNavigation = document.createElement('nav')
     featureNavigation.id = 'feature-navigation'
@@ -1205,11 +1207,11 @@ function initialize(data) {
     featureNavigationUl.appendChild(prevLi)
     let prev = document.createElement('a')
     prev.classList.add('prev-feature')
-    if (!feature.properties.order || isFirst == true) {
+    if (features.getIndexOf(feature) == 0) {
       prev.classList.add('inactive')
     }
     else {
-      let prevFeature = features[feature.properties.order - 2]
+      let prevFeature = features[features.getIndexOf(feature) - 1]
       prev.href = featureURL(feature)
       prev.addEventListener('click', function (e) {
         e.preventDefault()
@@ -1228,11 +1230,11 @@ function initialize(data) {
     featureNavigationUl.appendChild(nextLi)
     let next = document.createElement('a')
     next.classList.add('next-feature')
-    if (!feature.properties.order || isLast == true) {
+    if (features.getIndexOf(feature) == features.length - 1) {
       next.classList.add('inactive')
     }
     else {
-      let nextFeature = features[feature.properties.order] 
+      let nextFeature = features[features.getIndexOf(feature) + 1] 
       next.href = featureURL(feature)
       next.addEventListener('click', function (e) {
         e.preventDefault()
