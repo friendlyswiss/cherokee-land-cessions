@@ -1207,11 +1207,11 @@ function initialize(data) {
     featureNavigationUl.appendChild(prevLi)
     let prev = document.createElement('a')
     prev.classList.add('prev-feature')
-    if (features.getIndexOf(feature) == 0) {
+    if (features.indexOf(feature) == 0) {
       prev.classList.add('inactive')
     }
     else {
-      let prevFeature = features[features.getIndexOf(feature) - 1]
+      let prevFeature = features[features.indexOf(feature) - 1]
       prev.href = featureURL(feature)
       prev.addEventListener('click', function (e) {
         e.preventDefault()
@@ -1230,11 +1230,11 @@ function initialize(data) {
     featureNavigationUl.appendChild(nextLi)
     let next = document.createElement('a')
     next.classList.add('next-feature')
-    if (features.getIndexOf(feature) == features.length - 1) {
+    if (features.indexOf(feature) == features.length - 1) {
       next.classList.add('inactive')
     }
     else {
-      let nextFeature = features[features.getIndexOf(feature) + 1] 
+      let nextFeature = features[features.indexOf(feature) + 1] 
       next.href = featureURL(feature)
       next.addEventListener('click', function (e) {
         e.preventDefault()
