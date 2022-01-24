@@ -6,6 +6,7 @@ mapboxgl.accessToken = "pk.eyJ1IjoiY2FybGVkZ2UiLCJhIjoiY2tsd2kxa245MmlwazJ1bHdhe
 const years = [
   1715,
   1721,
+  1734,
   1747,
   1753,
   1765,
