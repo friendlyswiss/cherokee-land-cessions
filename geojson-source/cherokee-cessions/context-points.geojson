@@ -39,6 +39,7 @@
 { "type": "Feature", "properties": { "name": "Nununyi", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.31088, 35.49463 ] } },
 { "type": "Feature", "properties": { "name": "Stecoa", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.35995, 35.43208 ] } },
 { "type": "Feature", "properties": { "name": "Tuckasegee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.19636, 35.33388 ] } },
-{ "type": "Feature", "properties": { "name": "Tessentee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.54509, 35.39238 ] } }
+{ "type": "Feature", "properties": { "name": "Tessentee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.54509, 35.39238 ] } },
+{ "type": "Feature", "properties": { "name": "Great Tellico & Chatuga", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.276969249333405, 35.385168768819341 ] } }
 ]
 }
