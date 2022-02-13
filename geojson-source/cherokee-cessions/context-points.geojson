@@ -21,7 +21,7 @@
 { "type": "Feature", "properties": { "name": "Chota", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.13158, 35.55526 ] } },
 { "type": "Feature", "properties": { "name": "Fort Loudon", "startYear": 1756, "endYear": 1760, "type": "fort" }, "geometry": { "type": "Point", "coordinates": [ -84.202962, 35.596427 ] } },
 { "type": "Feature", "properties": { "name": "Mialoquo", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.24048, 35.61534 ] } },
-{ "type": "Feature", "properties": { "name": "Tellico Blockhouse", "startYear": 1700, "endYear": 2000, "type": "fort" }, "geometry": { "type": "Point", "coordinates": [ -84.202888, 35.600005 ] } },
+{ "type": "Feature", "properties": { "name": "Tellico Blockhouse", "startYear": 1794, "endYear": 1807, "type": "fort" }, "geometry": { "type": "Point", "coordinates": [ -84.202888, 35.600005 ] } },
 { "type": "Feature", "properties": { "name": "Fort Delaney", "startYear": 1800, "endYear": 2000, "type": "fort" }, "geometry": { "type": "Point", "coordinates": [ -83.829763, 35.205231 ] } },
 { "type": "Feature", "properties": { "name": "Fort Lindsay", "startYear": 1800, "endYear": 2000, "type": "fort" }, "geometry": { "type": "Point", "coordinates": [ -83.562613, 35.375664 ] } },
 { "type": "Feature", "properties": { "name": "Hiwassee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.575313254166332, 35.241736859265679 ] } },
