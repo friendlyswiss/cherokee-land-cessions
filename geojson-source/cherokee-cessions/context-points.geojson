@@ -18,7 +18,7 @@
 { "type": "Feature", "properties": { "name": "Watauga", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.393713, 35.223548 ] } },
 { "type": "Feature", "properties": { "name": "Cowee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.420056, 35.265466 ] } },
 { "type": "Feature", "properties": { "name": "Coweechee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.472368, 35.283024 ] } },
-{ "type": "Feature", "properties": { "name": "Chota", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.131585, 35.55514 ] } },
+{ "type": "Feature", "properties": { "name": "Chota", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.13158, 35.55526 ] } },
 { "type": "Feature", "properties": { "name": "Fort Loudon", "startYear": 1756, "endYear": 1760, "type": "fort" }, "geometry": { "type": "Point", "coordinates": [ -84.202962, 35.596427 ] } },
 { "type": "Feature", "properties": { "name": "Mialoquo", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.24048, 35.61534 ] } },
 { "type": "Feature", "properties": { "name": "Tellico Blockhouse", "startYear": 1700, "endYear": 2000, "type": "fort" }, "geometry": { "type": "Point", "coordinates": [ -84.202888, 35.600005 ] } },
@@ -43,6 +43,14 @@
 { "type": "Feature", "properties": { "name": "Chatuga", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.28828, 35.36834 ] } },
 { "type": "Feature", "properties": { "name": "Great Tellico", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.27734, 35.38079 ] } },
 { "type": "Feature", "properties": { "name": "Amohee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.64816, 35.19781 ] } },
-{ "type": "Feature", "properties": { "name": "Nantahala", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.65009, 35.25565 ] } }
+{ "type": "Feature", "properties": { "name": "Nantahala", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.65009, 35.25565 ] } },
+{ "type": "Feature", "properties": { "name": "Tanasee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.133859814094023, 35.545205014349946 ] } },
+{ "type": "Feature", "properties": { "name": "Tuskegee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.20251, 35.59441 ] } },
+{ "type": "Feature", "properties": { "name": "Tomotley", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.18743, 35.57609 ] } },
+{ "type": "Feature", "properties": { "name": "Toqua", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.16735, 35.56228 ] } },
+{ "type": "Feature", "properties": { "name": "Citico", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.09144, 35.54521 ] } },
+{ "type": "Feature", "properties": { "name": "Halfway Town", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.06332, 35.5436 ] } },
+{ "type": "Feature", "properties": { "name": "Chilhowee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.01008, 35.55081 ] } },
+{ "type": "Feature", "properties": { "name": "Tallassee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.0097, 35.51277 ] } }
 ]
 }
