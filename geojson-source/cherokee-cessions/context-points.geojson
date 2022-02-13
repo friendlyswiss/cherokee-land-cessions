@@ -24,7 +24,7 @@
 { "type": "Feature", "properties": { "name": "Tellico Blockhouse", "startYear": 1700, "endYear": 2000, "type": "fort" }, "geometry": { "type": "Point", "coordinates": [ -84.202888, 35.600005 ] } },
 { "type": "Feature", "properties": { "name": "Fort Delaney", "startYear": 1800, "endYear": 2000, "type": "fort" }, "geometry": { "type": "Point", "coordinates": [ -83.829763, 35.205231 ] } },
 { "type": "Feature", "properties": { "name": "Fort Lindsay", "startYear": 1800, "endYear": 2000, "type": "fort" }, "geometry": { "type": "Point", "coordinates": [ -83.562613, 35.375664 ] } },
-{ "type": "Feature", "properties": { "name": "Hiwassee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.564183, 35.241467 ] } },
+{ "type": "Feature", "properties": { "name": "Hiwassee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.575313254166332, 35.241736859265679 ] } },
 { "type": "Feature", "properties": { "name": "Fort Butler", "startYear": 1800, "endYear": 2000, "type": "fort" }, "geometry": { "type": "Point", "coordinates": [ -84.03935, 35.081517 ] } },
 { "type": "Feature", "properties": { "name": "Saluda Old Town", "startYear": 1700, "endYear": 2000, "type": "other" }, "geometry": { "type": "Point", "coordinates": [ -81.78382663030834, 34.170585528454325 ] } },
 { "type": "Feature", "properties": { "name": "Sticoe", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.39678, 34.88084 ] } },
