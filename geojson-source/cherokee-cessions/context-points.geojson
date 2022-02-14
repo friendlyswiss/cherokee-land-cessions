@@ -38,7 +38,7 @@
 { "type": "Feature", "properties": { "name": "Chestowee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.68615, 35.22244 ] } },
 { "type": "Feature", "properties": { "name": "Nununyi", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.31088, 35.49463 ] } },
 { "type": "Feature", "properties": { "name": "Stecoa", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.35995, 35.43208 ] } },
-{ "type": "Feature", "properties": { "name": "Tuckasegee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.19636, 35.33388 ] } },
+{ "type": "Feature", "properties": { "name": "Tuckasegee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.24391, 35.35125 ] } },
 { "type": "Feature", "properties": { "name": "Tessentee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.54509, 35.39238 ] } },
 { "type": "Feature", "properties": { "name": "Chatuga", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.28828, 35.36834 ] } },
 { "type": "Feature", "properties": { "name": "Great Tellico", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.27734, 35.38079 ] } },
@@ -51,6 +51,19 @@
 { "type": "Feature", "properties": { "name": "Citico", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.09144, 35.54521 ] } },
 { "type": "Feature", "properties": { "name": "Halfway Town", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.06332, 35.5436 ] } },
 { "type": "Feature", "properties": { "name": "Chilhowee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.01008, 35.55081 ] } },
-{ "type": "Feature", "properties": { "name": "Tallassee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.0097, 35.51277 ] } }
+{ "type": "Feature", "properties": { "name": "Tallassee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.0097, 35.51277 ] } },
+{ "type": "Feature", "properties": { "name": "Little Hiwassee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.97606, 35.07482 ] } },
+{ "type": "Feature", "properties": { "name": "Tlanusi'yi", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -84.03314, 35.09072 ] } },
+{ "type": "Feature", "properties": { "name": "Quanassee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.80955, 35.04309 ] } },
+{ "type": "Feature", "properties": { "name": "Little Tellico", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.89909, 35.18032 ] } },
+{ "type": "Feature", "properties": { "name": "Tallula", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.79449, 35.298 ] } },
+{ "type": "Feature", "properties": { "name": "Cheoah", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.83584, 35.31651 ] } },
+{ "type": "Feature", "properties": { "name": "Estanaula", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.85695, 35.35114 ] } },
+{ "type": "Feature", "properties": { "name": "Old Estatoe", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.37351, 34.98071 ] } },
+{ "type": "Feature", "properties": { "name": "Etchoe", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.38195, 35.15857 ] } },
+{ "type": "Feature", "properties": { "name": "Tassee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.34078, 35.17019 ] } },
+{ "type": "Feature", "properties": { "name": "Tuckaleechee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.45017, 35.42838 ] } },
+{ "type": "Feature", "properties": { "name": "Tomatly", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.8338, 35.20427 ] } },
+{ "type": "Feature", "properties": { "name": "Konohete", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.81457, 35.20098 ] } }
 ]
 }
