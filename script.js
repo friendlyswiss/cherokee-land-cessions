@@ -87,7 +87,8 @@ function initialize(data) {
     touchPitch: false,
     logoPosition: 'bottom-right',
     attributionControl: false,
-    renderWorldCopies: false
+    renderWorldCopies: false,
+    projection: 'naturalEarth'
   }
   if (initial.scope == "point") {
     mapParams.center = initial.center
