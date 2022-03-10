@@ -104,13 +104,6 @@ function initialize(data) {
   
   // Render GeoJSON data
   map.on("load", function () {
-    
-    ///////////////////////// Add Symbol Images ///////////////////////////
-    
-    map.loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Airplane_silhouette.svg/200px-Airplane_silhouette.svg.png', function(error, image) {
-      if (error) throw error;
-      map.addImage('airplane', image, {sdf: true})
-    })
       
     ///////////////////////// Add Map Sources ///////////////////////////
       
@@ -310,7 +303,15 @@ function initialize(data) {
       type: "symbol",
       source: "context-points",
       layout: {
-        "icon-image": 'campsite-11',
+        "icon-image": [
+          'match',
+          ["get", "type"],
+          'town',
+          'town-11',
+          'fort',
+          'fort-11',
+          'dot-10'
+        ],
         "icon-ignore-placement": true,
       },
       paint: {
@@ -331,7 +332,15 @@ function initialize(data) {
       type: "symbol",
       source: "context-points",
       layout: {
-        "icon-image": 'campsite-15',
+        "icon-image": [
+          'match',
+          ["get", "type"],
+          'town',
+          'town-15',
+          'fort',
+          'fort-15',
+          'border-dot-13'
+        ],
         "icon-ignore-placement": true,
       },
       paint: {
