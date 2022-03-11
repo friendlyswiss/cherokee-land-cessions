@@ -307,9 +307,9 @@ function initialize(data) {
           'match',
           ["get", "type"],
           'town',
-          'town-11',
+          'town-13',
           'fort',
-          'fort-11',
+          'fort-13',
           'dot-10'
         ],
         "icon-ignore-placement": true,

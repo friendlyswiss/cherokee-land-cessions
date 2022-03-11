@@ -3,7 +3,7 @@
 "name": "context-points",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
-{ "type": "Feature", "properties": { "name": "Fort Charlotte", "startYear": 1765, "endYear": 2000, "type": "fort" }, "geometry": { "type": "Point", "coordinates": [ -82.564259771924398, 33.955823379324926 ] } },
+{ "type": "Feature", "properties": { "name": "Fort Charlotte", "startYear": 1765, "endYear": 1797, "type": "fort" }, "geometry": { "type": "Point", "coordinates": [ -82.564259771924398, 33.955823379324926 ] } },
 { "type": "Feature", "properties": { "name": "Chauga", "startYear": 1715, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.16659, 34.60844 ] } },
 { "type": "Feature", "properties": { "name": "Seneca", "startYear": 1715, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -82.84732, 34.66024 ] } },
 { "type": "Feature", "properties": { "name": "Ninety-Six", "startYear": 1715, "endYear": 2000, "type": "other" }, "geometry": { "type": "Point", "coordinates": [ -82.01984, 34.14482 ] } },

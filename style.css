@@ -255,6 +255,9 @@ div.mapboxgl-popup-content p {
   font-size: 16px;
   font-family: Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol; }
 
+div.mapboxgl-popup-content p:empty {
+  display: none; }
+
 #sidebar-wrapper button,
 .mapboxgl-popup-content button {
   cursor: pointer;
@@ -649,8 +652,7 @@ div.feature-popup span {
   line-height: 1.7; }
 
 div.feature-popup .context-feature span {
-  font-weight: bold;
-  margin-top: 12px; }
+  font-weight: bold; }
 
 #main a.info-icon,
 #main button.close {
@@ -692,10 +694,9 @@ button.close-icon {
   position: relative;
   display: inline-block;
   cursor: pointer;
-  height: 3rem;
-  right: -12px;
   top: 0;
-  width: 3rem;
+  right: -10px;
+  width: 2rem;
   transition: all 300ms; }
   button.close-icon::before, button.close-icon::after {
     background: black;
