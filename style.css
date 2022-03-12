@@ -305,17 +305,34 @@ div.mapboxgl-popup-content p:empty {
 
 .line .thumbnail hr {
   border: none;
-  border-top: 3px dashed black;
+  border-top-width: 3px;
+  border-top-color: #FE7656;
   margin: 7px 0 4px 0; }
+
+.line .thumbnail hr.solid {
+  border-top-style: solid; }
+
+.line .thumbnail hr.dashed {
+  border-top-style: dashed; }
+
+.line .thumbnail hr.firstYear {
+  border-top-color: black; }
 
 .point .thumbnail span {
   display: block;
-  background: black;
+  background: #FE7656;
   width: 9px;
   height: 9px;
   border-radius: 50%;
   border: 1px solid black;
   margin: 5px auto 5px auto; }
+
+.point .thumbnail span.firstYear {
+  background: black; }
+
+.point .thumbnail object {
+  display: block;
+  margin: auto; }
 
 #feature-navigation {
   position: absolute;

@@ -37,9 +37,6 @@ appTitle = "Atlas of Cherokee Land Loss 1715–1835"
 const timelineStart = 1712
 const timelineEnd = 1838
 
-// Set colors for confidence levels
-const colors = {"low": "#FE7656", "moderate": "#FE7656", "high": "#FE7656", "cession": "#FE7656"}
-
 let hoveredFeatureId = null
 let selectedFeatureId = null    
 let hoveredOnPoint = false
@@ -139,7 +136,7 @@ function initialize(data) {
         'fill-color': [
           'case',
           ['all', ['==', ['get', "startYear"], initial.year], ['!=', ['get', "startYear"], years[0]], ['==', ['get', "newOrExisting"], "new"]],
-          colors.cession,
+          "#FE7656",
           '#000000'
         ],
         'fill-opacity': 0.5
@@ -193,17 +190,13 @@ function initialize(data) {
         "line-cap": "round"
       },
       paint: {
-        "line-color": [
-          'match',
-          ["get", "confidence"],
-          "Low",
-          colors.low,
-          "Moderate",
-          colors.moderate,
-          "High",
-          colors.high,
-          '#000000'
-        ],
+        "line-color": 
+          ['match', 
+            ['get', 'year'],
+            years[0],
+            "#000000",
+            "#FE7656"
+          ],
         'line-width': 3
       },
       filter: ["all", ["==", initial.year, ['get', "year"]], ["any", ["!=", ["get", "surveyed"], "No"], ["!=", ["get", "natural"], "No"]]]
@@ -218,73 +211,17 @@ function initialize(data) {
         "line-cap": "round"
       },
       paint: {
-        "line-color": [
-          'match',
-          ["get", "confidence"],
-          "Low",
-          colors.low,
-          "Moderate",
-          colors.moderate,
-          "High",
-          colors.high,
-          '#000000'
-        ],
+        "line-color": 
+          ['match', 
+            ['get', 'year'],
+            years[0],
+            "#000000",
+            "#FE7656"
+          ],
         "line-dasharray": ["literal", [2,2]],
         'line-width': 3
       },
       filter: ["all", ["==", initial.year, ['get', "year"]], ["==", ["get", "surveyed"], "No"], ["==", ["get", "natural"], "No"]]
-    });
-    
-    map.addLayer({
-      id: "boundary-points",
-      type: "circle",
-      source: "boundary-points",
-      paint: {
-        "circle-opacity": 0.01,
-        'circle-radius': 8.5,
-      },
-      filter: ["==", initial.year, ['get', "year"]]
-    });
-    
-    map.addLayer({
-      id: "boundary-points-highlight",
-      type: "circle",
-      source: "boundary-points",
-      paint: {
-        "circle-color": '#ffffff',
-        'circle-radius': [
-          'case',
-          ['boolean', ['feature-state', 'hover'], false],
-          8,
-          ['boolean', ['feature-state', 'selected'], false],
-          7,
-          0
-        ],
-      },
-      filter: ["==", initial.year, ['get', "year"]]
-    });
-    
-    map.addLayer({
-      id: "boundary-points-fill",
-      type: "circle",
-      source: "boundary-points",
-      paint: {
-        "circle-color": [
-          'match',
-          ["get", "confidence"],
-          "Low",
-          colors.cession,
-          "Moderate",
-          '#ffff00',
-          "High",
-          '#00ff00',
-          '#333333'
-        ],
-        'circle-radius': 4,
-        'circle-stroke-color': '#000000',
-        'circle-stroke-width': 1
-      },
-      filter: ["==", initial.year, ['get', "year"]]
     });
     
     map.addLayer({
@@ -354,6 +291,112 @@ function initialize(data) {
         ]
       },
       filter: ['all', ['>=', initial.year, ['get', 'startYear']], ['>', ['get', 'endYear'], initial.year]]
+    })
+
+    map.addLayer({
+      id: "boundary-points",
+      type: "circle",
+      source: "boundary-points",
+      paint: {
+        "circle-opacity": 0.01,
+        'circle-radius': 8.5,
+      },
+      filter: ["==", initial.year, ['get', "year"]]
+    })
+    
+    map.addLayer({
+      id: "boundary-points-highlight",
+      type: "circle",
+      source: "boundary-points",
+      paint: {
+        "circle-color": '#ffffff',
+        'circle-radius': [
+          'case',
+          ['boolean', ['feature-state', 'hover'], false],
+          8,
+          ['boolean', ['feature-state', 'selected'], false],
+          7,
+          0
+        ],
+      },
+      filter: ['all', ["==", initial.year, ['get', "year"]], ['any', ['!', ['has', 'type']], ['==', ['get', 'type'], null]]]
+    })
+    
+    map.addLayer({
+      id: "boundary-points-fill",
+      type: "circle",
+      source: "boundary-points",
+      paint: {
+        "circle-color": 
+          ['match', 
+            ['get', 'year'],
+            years[0],
+            "#000000",
+            "#FE7656"
+          ],
+        'circle-radius': 4,
+        'circle-stroke-color': '#000000',
+        'circle-stroke-width': 1
+      },
+      filter: ['all', ["==", initial.year, ['get', "year"]], ['any', ['!', ['has', 'type']], ['==', ['get', 'type'], null]]]
+    })
+    
+    map.addLayer({
+      id: "boundary-points-symbol",
+      type: "symbol",
+      source: "boundary-points",
+      layout: {
+        "icon-image": [
+          'match',
+          ["get", "type"],
+          'town',
+          'town-13',
+          'fort',
+          'fort-13',
+          'dot-10'
+        ],
+        "icon-ignore-placement": true,
+      },
+      paint: {
+        "icon-opacity": [
+          'case',
+          ['boolean', ['feature-state', 'hover'], false],
+          0,
+          ['boolean', ['feature-state', 'selected'], false],
+          0,
+          1
+        ]
+      },
+      filter: ['all', ["==", initial.year, ['get', "year"]], ['has', 'type'], ['!=', ['get', 'type'], null]]
+    })
+
+    map.addLayer({
+      id: "boundary-points-symbol-highlight",
+      type: "symbol",
+      source: "boundary-points",
+      layout: {
+        "icon-image": [
+          'match',
+          ["get", "type"],
+          'town',
+          'town-15',
+          'fort',
+          'fort-15',
+          'border-dot-13'
+        ],
+        "icon-ignore-placement": true,
+      },
+      paint: {
+        "icon-opacity": [
+          'case',
+          ['boolean', ['feature-state', 'hover'], false],
+          1,
+          ['boolean', ['feature-state', 'selected'], false],
+          1,
+          0
+        ]
+      },
+      filter: ['all', ["==", initial.year, ['get', "year"]], ['has', 'type'], ['!=', ['get', 'type'], null]]
     })
 
     if (initial.scope == "line") {
@@ -1067,11 +1110,21 @@ function initialize(data) {
         if (feature.geometry.type == "Point") {          
           featureDiv.classList.add('feature', 'point')
           
-          let dot = document.createElement('span')
-          if (feature.properties.confidence) {
-            dot.style.background = colors[feature.properties.confidence.toLowerCase()]
+          let thumbnailImage
+
+          if (feature.properties.type && feature.properties.type != null) {
+            thumbnailImage = document.createElement('object')
+            thumbnailImage.data = "/icons/" + feature.properties.type + "-13.svg"
+            thumbnailImage.type = "image/svg+xml"
           }
-          featureThumbnail.appendChild(dot)
+          else {
+            thumbnailImage = document.createElement('span')
+          }
+
+          if (feature.properties.year == years[0]) {
+            thumbnailImage.classList.add("firstYear")
+          }
+          featureThumbnail.appendChild(thumbnailImage)
           
           zoom.classList.add('point-zoom', 'fit-to')
           zoom.title = "Zoom to Point"
@@ -1084,8 +1137,9 @@ function initialize(data) {
           featureDiv.classList.add('feature', 'line')
           
           let line = document.createElement('hr')
-          if (features[i].properties.confidence) {
-            line.style.borderTop = "3px " + lineStyle(feature) + " " + colors[feature.properties.confidence.toLowerCase()]
+          line.classList.add(lineStyle(feature))
+          if (feature.properties.year == years[0]) {
+            line.classList.add("firstYear")
           }
           featureThumbnail.appendChild(line)
           
@@ -1164,7 +1218,6 @@ function initialize(data) {
     container.classList.add("metadata-container")
 
     const metadata = [
-      ["confidence", "Confidence"],
       ["natural", "Natural"],
       ["surveyed","Surveyed"]
     ]
@@ -1387,7 +1440,7 @@ function initialize(data) {
         'ceded-areas', 'fill-color', [
           'case',
           ['all', ['==', ['get', "startYear"], activeYear()], ['==', ['get', "newOrExisting"], "new"]],
-          colors.cession,
+          "#FE7656",
           '#000000'
         ])
     };
@@ -1399,8 +1452,10 @@ function initialize(data) {
     map.setFilter('boundary-lines-fill', ["all", currentYearFilter, ["any", ["!=", ["get", "surveyed"], "No"], ["!=", ["get", "natural"], "No"]]])
     map.setFilter('boundary-lines-dashed', ["all", currentYearFilter, ["==", ["get", "surveyed"], "No"], ["==", ["get", "natural"], "No"]])
     map.setFilter('boundary-points', currentYearFilter)
-    map.setFilter('boundary-points-highlight', currentYearFilter)
-    map.setFilter('boundary-points-fill', currentYearFilter)
+    map.setFilter('boundary-points-highlight', ['all', currentYearFilter, ['any', ['!', ['has', 'type']], ['==', ['get', 'type'], null]]])
+    map.setFilter('boundary-points-fill', ['all', currentYearFilter, ['any', ['!', ['has', 'type']], ['==', ['get', 'type'], null]]])
+    map.setFilter('boundary-points-symbol', ['all', currentYearFilter, ['has', 'type'], ['!=', ['get', 'type'], null]])
+    map.setFilter('boundary-points-symbol-highlight', ['all', currentYearFilter, ['has', 'type'], ['!=', ['get', 'type'], null]])
   }
   
   function getYearBounds(year) {
@@ -1630,6 +1685,14 @@ function initialize(data) {
           { source: 'context-points', sourceLayerId: 'context-points-symbol', id: hoveredFeatureId },
           { hover: false }
         )
+        map.setFeatureState(
+          { source: 'boundary-points', sourceLayerId: 'boundary-points-symbol-highlight', id: hoveredFeatureId },
+          { hover: false }
+        )
+        map.setFeatureState(
+          { source: 'boundary-points', sourceLayerId: 'boundary-points-symbol', id: hoveredFeatureId },
+          { hover: false }
+        )
       }
 
       // Save the topmost hovered feature's id to the hoveredFeatureID variable
@@ -1647,7 +1710,7 @@ function initialize(data) {
         } 
         else if (topFeature.source == "context-points") {
           map.setFeatureState(
-            { source: 'context-points', sourceLayerId: 'context-points-symbol', id: hoveredFeatureId },
+            { source: 'context-points', sourceLayerId: 'context-points-symbol-highlight', id: hoveredFeatureId },
             { hover: true }
           )
         }
@@ -1668,6 +1731,14 @@ function initialize(data) {
     map.getCanvas().style.cursor = "";
     map.setFeatureState(
       { source: 'boundary-points', sourceLayerId: 'boundary-points-highlight', id: hoveredFeatureId },
+      { hover: false }
+    )
+    map.setFeatureState(
+      { source: 'boundary-points', sourceLayerId: 'boundary-points-symbol', id: hoveredFeatureId },
+      { hover: false }
+    )
+    map.setFeatureState(
+      { source: 'boundary-points', sourceLayerId: 'boundary-points-symbol-highlight', id: hoveredFeatureId },
       { hover: false }
     )
     map.setFeatureState(
