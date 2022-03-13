@@ -430,6 +430,23 @@ function initialize(data) {
       filter: ['all', ["==", initial.year, ['get', "year"]], ['has', 'type'], ['!=', ['get', 'type'], null], ['!=', ['get', 'type'], ""]]
     })
 
+    map.addLayer({
+      id: "region-labels",
+      type: "symbol",
+      source: "regions",
+      layout: {
+        'text-field': ['get', 'name'],
+        'text-size': 11,
+        'text-transform': 'uppercase'
+      },
+      paint: {
+        'text-color': '#000000',
+        'text-halo-color': '#ffffff',
+        'text-halo-width': 1
+      },
+      filter: ['all', ['>=', initial.year, ['get', 'startYear']], ['>', ['get', 'endYear'], initial.year]]
+    })
+
     if (initial.scope == "line") {
       map.setFeatureState(
         { source: 'boundary-lines', sourceLayerId: 'boundary-lines-highlight', id: selectedFeatureId },
@@ -1462,6 +1479,7 @@ function initialize(data) {
     //Create a filter for a range of years; used for features that should accumulate over time
     let yearRangeFilter = ['all', ['>=', activeYear(), ['get', 'startYear']], ['>', ['get', 'endYear'], activeYear()]]
     map.setFilter('regions', yearRangeFilter)
+    map.setFilter('region-labels', yearRangeFilter)
     map.setFilter('ceded-areas', yearRangeFilter)
     map.setFilter('context-points', yearRangeFilter)
     map.setFilter('context-points-highlight', yearRangeFilter)
