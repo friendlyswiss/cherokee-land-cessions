@@ -55,6 +55,7 @@ async function main() {
   
   const data = {}
   data.cededAreas = await loadData('https://raw.githubusercontent.com/friendlyswiss/cherokee-land-cessions/main/geojson-source/cherokee-cessions/ceded-areas.geojson')
+  data.regions = await loadData('https://raw.githubusercontent.com/friendlyswiss/cherokee-land-cessions/main/geojson-source/cherokee-cessions/regions.geojson')
   data.boundaryLines = await loadData('https://raw.githubusercontent.com/friendlyswiss/cherokee-land-cessions/main/geojson-source/cherokee-cessions/boundary-lines.geojson')
   data.boundaryPoints = await loadData('https://raw.githubusercontent.com/friendlyswiss/cherokee-land-cessions/main/geojson-source/cherokee-cessions/boundary-points.geojson')
   data.contextPoints = await loadData('https://raw.githubusercontent.com/friendlyswiss/cherokee-land-cessions/main/geojson-source/cherokee-cessions/context-points.geojson')
@@ -104,6 +105,12 @@ function initialize(data) {
       
     ///////////////////////// Add Map Sources ///////////////////////////
       
+    map.addSource("regions", {
+      type: "geojson",
+      data: data.regions,
+      generateId: true
+    });
+
     map.addSource("ceded-areas", {
       type: "geojson",
       data: data.cededAreas,
@@ -128,6 +135,30 @@ function initialize(data) {
 
     ///////////////////////// Add Map Layers ///////////////////////////
     
+    map.addLayer({
+      id: "regions",
+      type: "fill",
+      source: "regions",
+      paint: {
+        'fill-color': [
+          'case',
+          ['==', ['get', "name"], "Lower Towns"],
+          "#d5b43c",
+          ['==', ['get', "name"], "Middle Towns"],
+          "#00d200",
+          ['==', ['get', "name"], "Out Towns"],
+          "#5188ff",
+          ['==', ['get', "name"], "Valley Towns"],
+          "#987db7",
+          ['==', ['get', "name"], "Overhill Towns"],
+          "#d27000",
+          '#000000'
+        ],
+        'fill-opacity': 0.5
+      },
+      filter: ['all', ['>=', initial.year, ['get', 'startYear']], ['>', ['get', 'endYear'], initial.year]]
+    })
+
     map.addLayer({
       id: "ceded-areas",
       type: "fill",
@@ -1430,6 +1461,7 @@ function initialize(data) {
   function filterMapByActiveYear() {
     //Create a filter for a range of years; used for features that should accumulate over time
     let yearRangeFilter = ['all', ['>=', activeYear(), ['get', 'startYear']], ['>', ['get', 'endYear'], activeYear()]]
+    map.setFilter('regions', yearRangeFilter)
     map.setFilter('ceded-areas', yearRangeFilter)
     map.setFilter('context-points', yearRangeFilter)
     map.setFilter('context-points-highlight', yearRangeFilter)
