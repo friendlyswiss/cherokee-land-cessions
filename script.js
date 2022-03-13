@@ -319,7 +319,7 @@ function initialize(data) {
           0
         ],
       },
-      filter: ['all', ["==", initial.year, ['get', "year"]], ['any', ['!', ['has', 'type']], ['==', ['get', 'type'], null]]]
+      filter: ['all', ["==", initial.year, ['get', "year"]], ['any', ['!', ['has', 'type']], ['==', ['get', 'type'], null], ['==', ['get', 'type'], ""]]]
     })
     
     map.addLayer({
@@ -338,7 +338,7 @@ function initialize(data) {
         'circle-stroke-color': '#000000',
         'circle-stroke-width': 1
       },
-      filter: ['all', ["==", initial.year, ['get', "year"]], ['any', ['!', ['has', 'type']], ['==', ['get', 'type'], null]]]
+      filter: ['all', ["==", initial.year, ['get', "year"]], ['any', ['!', ['has', 'type']], ['==', ['get', 'type'], null], ['==', ['get', 'type'], ""]]]
     })
     
     map.addLayer({
@@ -367,7 +367,7 @@ function initialize(data) {
           1
         ]
       },
-      filter: ['all', ["==", initial.year, ['get', "year"]], ['has', 'type'], ['!=', ['get', 'type'], null]]
+      filter: ['all', ["==", initial.year, ['get', "year"]], ['has', 'type'], ['!=', ['get', 'type'], null], ['!=', ['get', 'type'], ""]]
     })
 
     map.addLayer({
@@ -396,7 +396,7 @@ function initialize(data) {
           0
         ]
       },
-      filter: ['all', ["==", initial.year, ['get', "year"]], ['has', 'type'], ['!=', ['get', 'type'], null]]
+      filter: ['all', ["==", initial.year, ['get', "year"]], ['has', 'type'], ['!=', ['get', 'type'], null], ['!=', ['get', 'type'], ""]]
     })
 
     if (initial.scope == "line") {
@@ -1452,10 +1452,10 @@ function initialize(data) {
     map.setFilter('boundary-lines-fill', ["all", currentYearFilter, ["any", ["!=", ["get", "surveyed"], "No"], ["!=", ["get", "natural"], "No"]]])
     map.setFilter('boundary-lines-dashed', ["all", currentYearFilter, ["==", ["get", "surveyed"], "No"], ["==", ["get", "natural"], "No"]])
     map.setFilter('boundary-points', currentYearFilter)
-    map.setFilter('boundary-points-highlight', ['all', currentYearFilter, ['any', ['!', ['has', 'type']], ['==', ['get', 'type'], null]]])
-    map.setFilter('boundary-points-fill', ['all', currentYearFilter, ['any', ['!', ['has', 'type']], ['==', ['get', 'type'], null]]])
-    map.setFilter('boundary-points-symbol', ['all', currentYearFilter, ['has', 'type'], ['!=', ['get', 'type'], null]])
-    map.setFilter('boundary-points-symbol-highlight', ['all', currentYearFilter, ['has', 'type'], ['!=', ['get', 'type'], null]])
+    map.setFilter('boundary-points-highlight', ['all', currentYearFilter, ['any', ['!', ['has', 'type']], ['==', ['get', 'type'], null], ['==', ['get', 'type'], ""]]])
+    map.setFilter('boundary-points-fill', ['all', currentYearFilter, ['any', ['!', ['has', 'type']], ['==', ['get', 'type'], null], ['==', ['get', 'type'], ""]]])
+    map.setFilter('boundary-points-symbol', ['all', currentYearFilter, ['has', 'type'], ['!=', ['get', 'type'], null], ['!=', ['get', 'type'], ""]])
+    map.setFilter('boundary-points-symbol-highlight', ['all', currentYearFilter, ['has', 'type'], ['!=', ['get', 'type'], null], ['!=', ['get', 'type'], ""]])
   }
   
   function getYearBounds(year) {
