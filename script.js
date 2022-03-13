@@ -156,7 +156,7 @@ function initialize(data) {
         ],
         'fill-opacity': 0.5
       },
-      filter: ['all', ['>=', initial.year, ['get', 'startYear']], ['>', ['get', 'endYear'], initial.year]]
+      filter: ['==', 1715, ['get', 'startYear']]
     })
 
     map.addLayer({
