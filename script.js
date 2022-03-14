@@ -56,6 +56,7 @@ async function main() {
   const data = {}
   data.cededAreas = await loadData('https://raw.githubusercontent.com/friendlyswiss/cherokee-land-cessions/main/geojson-source/cherokee-cessions/ceded-areas.geojson')
   data.regions = await loadData('https://raw.githubusercontent.com/friendlyswiss/cherokee-land-cessions/main/geojson-source/cherokee-cessions/regions.geojson')
+  data.regionPoints = await loadData('https://raw.githubusercontent.com/friendlyswiss/cherokee-land-cessions/main/geojson-source/cherokee-cessions/region-points.geojson')
   data.boundaryLines = await loadData('https://raw.githubusercontent.com/friendlyswiss/cherokee-land-cessions/main/geojson-source/cherokee-cessions/boundary-lines.geojson')
   data.boundaryPoints = await loadData('https://raw.githubusercontent.com/friendlyswiss/cherokee-land-cessions/main/geojson-source/cherokee-cessions/boundary-points.geojson')
   data.contextPoints = await loadData('https://raw.githubusercontent.com/friendlyswiss/cherokee-land-cessions/main/geojson-source/cherokee-cessions/context-points.geojson')
@@ -108,6 +109,12 @@ function initialize(data) {
     map.addSource("regions", {
       type: "geojson",
       data: data.regions,
+      generateId: true
+    });
+
+    map.addSource("regions-points", {
+      type: "geojson",
+      data: data.regionPoints,
       generateId: true
     });
 
@@ -433,13 +440,14 @@ function initialize(data) {
     map.addLayer({
       id: "region-labels",
       type: "symbol",
-      source: "regions",
+      source: "region-points",
       layout: {
         'text-field': ['get', 'name'],
         'text-size': 11,
         'text-transform': 'uppercase'
       },
       paint: {
+        'text-opacity': ["interpolate", ["linear"], ["zoom"], 11, 1, 11.5, 0],
         'text-color': '#000000',
         'text-halo-color': '#ffffff',
         'text-halo-width': 1
