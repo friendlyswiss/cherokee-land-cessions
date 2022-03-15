@@ -112,7 +112,7 @@ function initialize(data) {
       generateId: true
     });
 
-    map.addSource("regions-points", {
+    map.addSource("region-points", {
       type: "geojson",
       data: data.regionPoints,
       generateId: true
