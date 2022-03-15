@@ -266,6 +266,7 @@ function initialize(data) {
       id: "context-points",
       type: "circle",
       source: "context-points",
+      minzoom: 7,
       paint: {
         "circle-opacity": 0.01,
         'circle-radius': 8.5,
@@ -277,6 +278,7 @@ function initialize(data) {
       id: "context-points-symbol",
       type: "symbol",
       source: "context-points",
+      minzoom: 7,
       layout: {
         "icon-image": [
           'match',
@@ -306,6 +308,7 @@ function initialize(data) {
       id: "context-points-highlight",
       type: "symbol",
       source: "context-points",
+      minzoom: 7,
       layout: {
         "icon-image": [
           'match',
@@ -441,6 +444,7 @@ function initialize(data) {
       id: "region-labels",
       type: "symbol",
       source: "region-points",
+      minzoom: 6,
       layout: {
         'text-field': ['get', 'name'],
         'text-size': 11,
