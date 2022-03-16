@@ -444,14 +444,14 @@ function initialize(data) {
       id: "region-labels",
       type: "symbol",
       source: "region-points",
-      minzoom: 6,
+      //minzoom: 6,
       layout: {
         'text-field': ['get', 'name'],
         'text-size': 11,
         'text-transform': 'uppercase'
       },
       paint: {
-        'text-opacity': ["interpolate", ["linear"], ["zoom"], 11, 1, 11.5, 0],
+        'text-opacity': ["interpolate", ["linear"], ["zoom"], ['get', 'minZoom'], 0, ['+', 0.1, ['get', 'minZoom']], 1, ['get', 'maxZoom'], 1, ['+', 0.1, ['get', 'maxZoom']], 0],
         'text-color': '#000000',
         'text-halo-color': '#ffffff',
         'text-halo-width': 1
