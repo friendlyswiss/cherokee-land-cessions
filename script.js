@@ -451,7 +451,7 @@ function initialize(data) {
         'text-transform': 'uppercase'
       },
       paint: {
-        'text-opacity': ["interpolate", ["linear"], ["zoom"], ['get', 'minZoom'], 0, ['+', 0.1, ['get', 'minZoom']], 1, ['get', 'maxZoom'], 1, ['+', 0.1, ['get', 'maxZoom']], 0],
+        'text-opacity': ["interpolate", ["linear"], ["zoom"], ['literal', ['get', 'minZoom']], 0, ['literal', ['+', 0.1, ['get', 'minZoom']]], 1, ['literal', ['get', 'maxZoom']], 1, ['literal', ['+', 0.1, ['get', 'maxZoom']]], 0],
         'text-color': '#000000',
         'text-halo-color': '#ffffff',
         'text-halo-width': 1
