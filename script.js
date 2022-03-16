@@ -456,7 +456,7 @@ function initialize(data) {
         'text-halo-color': '#ffffff',
         'text-halo-width': 1
       },
-      filter: ['all', ['>=', initial.year, ['get', 'startYear']], ['>', ['get', 'endYear'], initial.year]]
+      filter: ['all', ['>=', initial.year, ['get', 'startYear']], ['>', ['get', 'endYear'], initial.year], ['>', ['get', 'minZoom'], 'zoom'], ['>', 'zoom', ['get', 'maxZoom']]]
     })
 
     if (initial.scope == "line") {
