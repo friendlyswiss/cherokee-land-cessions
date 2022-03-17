@@ -161,7 +161,10 @@ function initialize(data) {
           "#d27000",
           '#000000'
         ],
-        'fill-opacity': 0.5
+        'fill-opacity': ['interpolate', ['linear'], ['zoom'], 
+          10, 0.5,
+          12, 0 
+        ]
       },
       filter: ['all', ['>=', initial.year, ['get', 'startYear']], ['>', ['get', 'endYear'], initial.year]]
     })
@@ -458,6 +461,46 @@ function initialize(data) {
         'text-halo-width': 1
       },
       filter: ['all', ['==', ['get', 'zoomLevel'], 'low'], ['>=', initial.year, ['get', 'startYear']], ['>', ['get', 'endYear'], initial.year]]
+    })
+
+    map.addLayer({
+      id: "region-labels-mid-zoom",
+      type: "symbol",
+      source: "region-points",
+      minzoom: 8,
+      maxzoom: 11,
+      layout: {
+        'text-size': 11,
+        'text-field': ['get', 'name'],
+        'text-transform': 'uppercase'
+      },
+      paint: {
+        
+        'text-color': '#000000',
+        'text-halo-color': '#ffffff',
+        'text-halo-width': 1
+      },
+      filter: ['all', ['==', ['get', 'zoomLevel'], 'mid'], ['>=', initial.year, ['get', 'startYear']], ['>', ['get', 'endYear'], initial.year]]
+    })
+
+    map.addLayer({
+      id: "region-labels-high-zoom",
+      type: "symbol",
+      source: "region-points",
+      minzoom: 9,
+      maxzoom: 11,
+      layout: {
+        'text-size': 11,
+        'text-field': ['get', 'name'],
+        'text-transform': 'uppercase'
+      },
+      paint: {
+        
+        'text-color': '#000000',
+        'text-halo-color': '#ffffff',
+        'text-halo-width': 1
+      },
+      filter: ['all', ['==', ['get', 'zoomLevel'], 'high'], ['>=', initial.year, ['get', 'startYear']], ['>', ['get', 'endYear'], initial.year]]
     })
 
     if (initial.scope == "line") {
@@ -1492,7 +1535,9 @@ function initialize(data) {
     //Create a filter for a range of years; used for features that should accumulate over time
     let yearRangeFilter = ['all', ['>=', activeYear(), ['get', 'startYear']], ['>', ['get', 'endYear'], activeYear()]]
     map.setFilter('regions', yearRangeFilter)
-    map.setFilter('region-labels', yearRangeFilter)
+    map.setFilter('region-labels-low-zoom', ['all', ['==', ['get', 'zoomLevel'], 'low'], yearRangeFilter])
+    map.setFilter('region-labels-mid-zoom', ['all', ['==', ['get', 'zoomLevel'], 'mid'], yearRangeFilter])
+    map.setFilter('region-labels-high-zoom', ['all', ['==', ['get', 'zoomLevel'], 'high'], yearRangeFilter])
     map.setFilter('ceded-areas', yearRangeFilter)
     map.setFilter('context-points', yearRangeFilter)
     map.setFilter('context-points-highlight', yearRangeFilter)
