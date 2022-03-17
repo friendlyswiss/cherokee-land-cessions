@@ -3,18 +3,18 @@
 "name": "region-points",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
-{ "type": "Feature", "properties": { "name": "Valley Towns", "startYear": 1700, "endYear": 1767, "minZoom": 6, "maxZoom": 8, "zoomLevel": "low" }, "geometry": { "type": "Point", "coordinates": [ -84.020669988532489, 35.014801548764765 ] } },
-{ "type": "Feature", "properties": { "name": "Overhill Towns", "startYear": 1700, "endYear": 1767, "minZoom": 6, "maxZoom": 8, "zoomLevel": "low" }, "geometry": { "type": "Point", "coordinates": [ -84.4130705, 35.3591435 ] } },
-{ "type": "Feature", "properties": { "name": "Out Towns", "startYear": 1700, "endYear": 1767, "minZoom": 6, "maxZoom": 8, "zoomLevel": "low" }, "geometry": { "type": "Point", "coordinates": [ -83.3843666, 35.4417692 ] } },
-{ "type": "Feature", "properties": { "name": "Middle Towns", "startYear": 1700, "endYear": 1767, "minZoom": 6, "maxZoom": 8, "zoomLevel": "low" }, "geometry": { "type": "Point", "coordinates": [ -83.378998234128602, 35.126188887431603 ] } },
-{ "type": "Feature", "properties": { "name": "Lower Towns", "startYear": 1700, "endYear": 1767, "minZoom": 6, "maxZoom": 8, "zoomLevel": "low" }, "geometry": { "type": "Point", "coordinates": [ -83.3339458, 34.7286415 ] } },
-{ "type": "Feature", "properties": { "name": "Out Towns", "startYear": 1700, "endYear": 1767, "minZoom": 8, "maxZoom": 11, "zoomLevel": "mid" }, "geometry": { "type": "Point", "coordinates": [ -83.297819463565702, 35.394518076543797 ] } },
-{ "type": "Feature", "properties": { "name": "Lower Towns", "startYear": 1700, "endYear": 1767, "minZoom": 8, "maxZoom": 11, "zoomLevel": "mid" }, "geometry": { "type": "Point", "coordinates": [ -83.055851786543158, 34.763569083605852 ] } },
-{ "type": "Feature", "properties": { "name": "Overhill Towns", "startYear": 1700, "endYear": 1767, "minZoom": 8, "maxZoom": 11, "zoomLevel": "mid" }, "geometry": { "type": "Point", "coordinates": [ -84.200286864144772, 35.525444030694061 ] } },
-{ "type": "Feature", "properties": { "name": "Overhill Towns (Offshoot)", "startYear": 1700, "endYear": 1767, "minZoom": 9, "maxZoom": 11, "zoomLevel": "high" }, "geometry": { "type": "Point", "coordinates": [ -84.616943359143704, 35.221656800243224 ] } },
-{ "type": "Feature", "properties": { "name": "Lower Towns (Offshoot)", "startYear": 1700, "endYear": 1767, "minZoom": 9, "maxZoom": 11, "zoomLevel": "high" }, "geometry": { "type": "Point", "coordinates": [ -83.612552881216303, 34.612783219649906 ] } },
-{ "type": "Feature", "properties": { "name": "Valley Towns (Offshoot)", "startYear": 1700, "endYear": 1767, "minZoom": 9, "maxZoom": 11, "zoomLevel": "high" }, "geometry": { "type": "Point", "coordinates": [ -83.827299892373361, 35.330384661819842 ] } },
-{ "type": "Feature", "properties": { "name": "Valley Towns", "startYear": 1700, "endYear": 1767, "minZoom": 8, "maxZoom": 11, "zoomLevel": "mid" }, "geometry": { "type": "Point", "coordinates": [ -84.020669988532489, 35.014801548764765 ] } },
-{ "type": "Feature", "properties": { "name": "Middle Towns", "startYear": 1700, "endYear": 1767, "minZoom": 8, "maxZoom": 11, "zoomLevel": "mid" }, "geometry": { "type": "Point", "coordinates": [ -83.378998234128602, 35.126188887431603 ] } }
+{ "type": "Feature", "properties": { "name": "Valley Towns", "startYear": 1700, "endYear": 1767, "zoomLevel": "low" }, "geometry": { "type": "Point", "coordinates": [ -84.020669988532489, 35.014801548764765 ] } },
+{ "type": "Feature", "properties": { "name": "Overhill Towns", "startYear": 1700, "endYear": 1767, "zoomLevel": "low" }, "geometry": { "type": "Point", "coordinates": [ -84.4130705, 35.3591435 ] } },
+{ "type": "Feature", "properties": { "name": "Out Towns", "startYear": 1700, "endYear": 1767, "zoomLevel": "low" }, "geometry": { "type": "Point", "coordinates": [ -83.3843666, 35.4417692 ] } },
+{ "type": "Feature", "properties": { "name": "Middle Towns", "startYear": 1700, "endYear": 1767, "zoomLevel": "low" }, "geometry": { "type": "Point", "coordinates": [ -83.381067701644497, 35.205754420170102 ] } },
+{ "type": "Feature", "properties": { "name": "Lower Towns", "startYear": 1700, "endYear": 1767, "zoomLevel": "low" }, "geometry": { "type": "Point", "coordinates": [ -83.3339458, 34.7286415 ] } },
+{ "type": "Feature", "properties": { "name": "Out Towns", "startYear": 1700, "endYear": 1767, "zoomLevel": "mid" }, "geometry": { "type": "Point", "coordinates": [ -83.297819463565702, 35.394518076543797 ] } },
+{ "type": "Feature", "properties": { "name": "Lower Towns", "startYear": 1700, "endYear": 1767, "zoomLevel": "mid" }, "geometry": { "type": "Point", "coordinates": [ -83.055851786543158, 34.763569083605852 ] } },
+{ "type": "Feature", "properties": { "name": "Overhill Towns", "startYear": 1700, "endYear": 1767, "zoomLevel": "mid" }, "geometry": { "type": "Point", "coordinates": [ -84.200286864144772, 35.525444030694061 ] } },
+{ "type": "Feature", "properties": { "name": "Overhill Towns (Offshoot)", "startYear": 1700, "endYear": 1767, "zoomLevel": "high" }, "geometry": { "type": "Point", "coordinates": [ -84.616943359143704, 35.221656800243224 ] } },
+{ "type": "Feature", "properties": { "name": "Lower Towns (Offshoot)", "startYear": 1700, "endYear": 1767, "zoomLevel": "high" }, "geometry": { "type": "Point", "coordinates": [ -83.612552881216303, 34.612783219649906 ] } },
+{ "type": "Feature", "properties": { "name": "Valley Towns (Offshoot)", "startYear": 1700, "endYear": 1767, "zoomLevel": "high" }, "geometry": { "type": "Point", "coordinates": [ -83.827299892373361, 35.330384661819842 ] } },
+{ "type": "Feature", "properties": { "name": "Valley Towns", "startYear": 1700, "endYear": 1767, "zoomLevel": "mid" }, "geometry": { "type": "Point", "coordinates": [ -84.020669988532489, 35.014801548764765 ] } },
+{ "type": "Feature", "properties": { "name": "Middle Towns", "startYear": 1700, "endYear": 1767, "zoomLevel": "mid" }, "geometry": { "type": "Point", "coordinates": [ -83.378998234128602, 35.126188887431603 ] } }
 ]
 }
