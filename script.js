@@ -281,7 +281,7 @@ function initialize(data) {
       id: "context-points-symbol",
       type: "symbol",
       source: "context-points",
-      minzoom: 7,
+      minzoom: 8,
       layout: {
         "icon-image": [
           'match',
@@ -311,7 +311,7 @@ function initialize(data) {
       id: "context-points-highlight",
       type: "symbol",
       source: "context-points",
-      minzoom: 7,
+      minzoom: 8,
       layout: {
         "icon-image": [
           'match',
