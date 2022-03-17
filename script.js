@@ -446,16 +446,33 @@ function initialize(data) {
       source: "region-points",
       //minzoom: 6,
       layout: {
+        'text-size': ["step", ["zoom"], 
+          0,
+          6,
+          ['case', 
+            ['>', ['get', 'minZoom'], 6],
+            11,
+            ['<', ['get', 'maxZoom'], 6],
+            0,
+            11
+          ],
+          // 8,
+          // ['case', ['>', ['number', ['get', 'minZoom']], 8], 11, ['<', ['number', ['get', 'maxZoom']], 8], 0, 11],
+          // 9,
+          // ['case', ['>', ['number', ['get', 'minZoom']], 9], 11, ['<', ['number', ['get', 'maxZoom']], 9], 0, 11],
+          // 11,
+          // ['case', ['>', ['number', ['get', 'minZoom']], 11], 11, ['<', ['number', ['get', 'maxZoom']], 11], 0, 11],
+        ],
         'text-field': ['get', 'name'],
-        'text-size': 11,
         'text-transform': 'uppercase'
       },
       paint: {
+        
         'text-color': '#000000',
         'text-halo-color': '#ffffff',
         'text-halo-width': 1
       },
-      filter: ['all', ['>=', initial.year, ['get', 'startYear']], ['>', ['get', 'endYear'], initial.year], ['>', 'zoom', ['get', 'minZoom'], 'zoom'], ['>', ['get', 'maxZoom'], 'zoom']]
+      filter: ['all', ['>=', initial.year, ['get', 'startYear']], ['>', ['get', 'endYear'], initial.year]]
     })
 
     if (initial.scope == "line") {
