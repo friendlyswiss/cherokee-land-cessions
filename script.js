@@ -441,28 +441,13 @@ function initialize(data) {
     })
 
     map.addLayer({
-      id: "region-labels",
+      id: "region-labels-low-zoom",
       type: "symbol",
       source: "region-points",
-      //minzoom: 6,
+      minzoom: 6,
+      maxzoom: 8,
       layout: {
-        'text-size': ["step", ["zoom"], 
-          0,
-          6,
-          ['case', 
-            ['>', ['get', 'minZoom'], 6],
-            11,
-            ['<', ['get', 'maxZoom'], 6],
-            0,
-            11
-          ],
-          // 8,
-          // ['case', ['>', ['number', ['get', 'minZoom']], 8], 11, ['<', ['number', ['get', 'maxZoom']], 8], 0, 11],
-          // 9,
-          // ['case', ['>', ['number', ['get', 'minZoom']], 9], 11, ['<', ['number', ['get', 'maxZoom']], 9], 0, 11],
-          // 11,
-          // ['case', ['>', ['number', ['get', 'minZoom']], 11], 11, ['<', ['number', ['get', 'maxZoom']], 11], 0, 11],
-        ],
+        'text-size': 11,
         'text-field': ['get', 'name'],
         'text-transform': 'uppercase'
       },
@@ -472,7 +457,7 @@ function initialize(data) {
         'text-halo-color': '#ffffff',
         'text-halo-width': 1
       },
-      filter: ['all', ['>=', initial.year, ['get', 'startYear']], ['>', ['get', 'endYear'], initial.year]]
+      filter: ['all', ['==', ['get', 'zoomLevel'], 'low'], ['>=', initial.year, ['get', 'startYear']], ['>', ['get', 'endYear'], initial.year]]
     })
 
     if (initial.scope == "line") {
