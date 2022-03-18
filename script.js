@@ -451,8 +451,7 @@ function initialize(data) {
       maxzoom: 8,
       layout: {
         'text-size': 11,
-        'text-field': ['get', 'name'],
-        'text-transform': 'uppercase'
+        'text-field': ['get', 'name']
       },
       paint: {
         
@@ -471,8 +470,7 @@ function initialize(data) {
       maxzoom: 11,
       layout: {
         'text-size': 11,
-        'text-field': ['get', 'name'],
-        'text-transform': 'uppercase'
+        'text-field': ['get', 'name']
       },
       paint: {
         
@@ -491,8 +489,7 @@ function initialize(data) {
       maxzoom: 11,
       layout: {
         'text-size': 11,
-        'text-field': ['get', 'name'],
-        'text-transform': 'uppercase'
+        'text-field': ['get', 'name']
       },
       paint: {
         
