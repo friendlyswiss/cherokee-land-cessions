@@ -68,8 +68,13 @@
     },
     {
       "slug": "thornton1990",
-      "citation": "Thornton, Russell. The Cherokees: A population history. U of Nebraska Press, 1990.",
+      "citation": "Thornton, Russell. 1990. The Cherokees: A population history. U of Nebraska Press.",
       "url": "https://www.nebraskapress.unl.edu/nebraska-paperback/9780803294103/"
+    },
+    {
+      "slug": "schoolcraft1852",
+      "citation": "Schoolcraft, Henry Rowe. 1852. \"Information Respecting the History, Condition And Prospects of the Indian Tribes of the United States, Part II.\" Philadelphia, PA: Lippincott, Grambo & Company.",
+      "url": "https://babel.hathitrust.org/cgi/pt?id=aeu.ark:/13960/t76t1gk33&view=1up&seq=12"
     }
   ]
 }
