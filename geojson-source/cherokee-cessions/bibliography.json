@@ -57,6 +57,11 @@
       "url": "https://www.gutenberg.org/files/45634/45634-h/45634-h.htm#ch2"
     },
     {
+      "slug": "ramsey1853",
+      "citation": "Ramsey, James Gettys McGready. 1853. The Annals of Tennessee to the End of the Eighteenth Century: Comprising Its Settlement, as the Watauga Association, from 1769 to 1777; a Part of North-Carolina, from 1777 to 1784; the State of Franklin, from 1784-1788; a Part of North-Carolina, from 1788-1790; the Territory of the U. States, South of the Ohio, from 1790 to 1796; the State of Tennessee, from 1796 to 1800. Charleston, SC: John Russell",
+      "url": "https://www.google.com/books/edition/The_Annals_of_Tennessee_to_the_End_of_th/RXMOAAAAIAAJ?hl=en&gbpv=1"
+    },
+    {
       "slug": "royce1881",
       "citation": "Royce, Charles C. 1881. \"Cessions of land by Indian tribes to the United States: Illustrated by those in the State of Indiana.\" First annual report of the Bureau of Ethnology to the Secretary of the Smithsonian Institution, 1879-80: 247-262. Washington: Government Printing Office.",
       "url": "https://archive.org/details/annualreportofbu118791880smit/page/246/"
@@ -82,9 +87,19 @@
       "url": "https://www.nebraskapress.unl.edu/nebraska-paperback/9780803294103/"
     },
     {
+      "slug": "salley1923",
+      "citation": "Salley, Alexander Samuel. 1923. \"The Evolution of Orangeburg County,\" in \"Orangeburg County Economic and Social.\" University of South Carolina Bulletin No. 124.",
+      "url": "https://ogsgs.org/oburg-evol.pdf"
+    },
+    {
       "slug": "schoolcraft1852",
       "citation": "Schoolcraft, Henry Rowe. 1852. \"Information Respecting the History, Condition And Prospects of the Indian Tribes of the United States, Part II.\" Philadelphia, PA: Lippincott, Grambo & Company.",
       "url": "https://babel.hathitrust.org/cgi/pt?id=aeu.ark:/13960/t76t1gk33&view=1up&seq=12"
+    },
+    {
+      "slug": "woodward1963",
+      "citation": "Woodward, Grace Steele. 1963. The Cherokees. Norman, OK: University of Oklahoma Press.",
+      "url": "https://www.google.com/books/edition/The_Cherokees/r4mKohpSJ2kC?hl=en&gbpv=0"
     }
   ]
 }
