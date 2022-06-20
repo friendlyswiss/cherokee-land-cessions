@@ -64,6 +64,9 @@
 { "type": "Feature", "properties": { "name": "Tassee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.34078, 35.17019 ] } },
 { "type": "Feature", "properties": { "name": "Tuckaleechee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.45017, 35.42838 ] } },
 { "type": "Feature", "properties": { "name": "Tomatly", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.8338, 35.20427 ] } },
-{ "type": "Feature", "properties": { "name": "Konohete", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.81457, 35.20098 ] } }
+{ "type": "Feature", "properties": { "name": "Konohete", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.81457, 35.20098 ] } },
+{ "type": "Feature", "properties": { "name": "Echota\/Little Chota", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.669346496750109, 34.675133760645295 ] } },
+{ "type": "Feature", "properties": { "name": "Nacoochee", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.616164564798254, 34.551117602358282 ] } },
+{ "type": "Feature", "properties": { "name": "Soque", "startYear": 1700, "endYear": 2000, "type": "town" }, "geometry": { "type": "Point", "coordinates": [ -83.557326332735485, 34.588708695065051 ] } }
 ]
 }
