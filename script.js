@@ -233,9 +233,11 @@ function initialize(data) {
       paint: {
         "line-color": 
           ['match', 
-            ['get', 'year'],
-            years[0],
-            "#000000",
+            ['get', 'type'],
+            "inner",
+            "#0000ff",
+            "outer",
+            "#00ff00",
             "#FE7656"
           ],
         'line-width': 3
